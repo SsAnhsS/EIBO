@@ -2,8 +2,7 @@
 
 .root{
 	-fx-background-color: lightgrey;
-  
-  -fx-text-fill: green;
+  	-fx-text-fill: green;
 }
 
 .icon-button{
