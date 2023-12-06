@@ -2,8 +2,8 @@
 
 .root{
 	-fx-background-color: lightgrey;
-  
   -fx-text-fill: green;
+  -fx-background-inline-size: 2px;
 }
 
 .icon-button{
