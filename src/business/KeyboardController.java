@@ -1,6 +1,8 @@
 package business;
 
 
+import java.util.ArrayList;
+
 import de.hsrm.mi.prog.util.StaticScanner;
 
 public class KeyboardController {
@@ -12,10 +14,15 @@ public class KeyboardController {
 		mp3Player = new MP3Player();
 		playlistManager = new PlaylistManager();
 		
+		ArrayList <String> tracksName = playlistManager.getTrackName();
+		
 		String playingFile = "01 Bring Mich Nach Hause.mp3";
 		
 		String line;
 		do {
+			for(String s : tracksName) {
+				System.out.println(tracksName.indexOf(s) + " " + s);
+			}
 			System.out.print("Kommand: ");
 			line = StaticScanner.nextString();
 			
@@ -28,10 +35,10 @@ public class KeyboardController {
 			
 			switch (commands[0]) {
 			case "play":
-				if (commands.length > 1)
+				if (commands.length > 1) {
 					playingFile = mergeName(commands) + ".mp3";
-				
-				mp3Player.play("data\\mp3-songs\\" + playingFile);
+					mp3Player.play("/EIBO/src/data/mp3-songs/" + playingFile);
+				}	
 				break;
 			case "pause":
 				mp3Player.pause();

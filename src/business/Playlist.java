@@ -1,8 +1,11 @@
 package business;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,19 +13,20 @@ public class Playlist {
 	private String playlistName;
 	private ArrayList<Track> tracks;
 	private Date creationDate; //LocalDate date = LocalDate.now();
-	private String file;
+	private String file = "D:\\GitHub\\EIBO\\data\\playlist\\test.m3u";
+	//D:\\GitHub\\EIBO\\data\\playlist\\test.m3
 	
-	
-	public Playlist(String playlistName, String file) {
+	public Playlist(String playlistName) {
 		this.playlistName = playlistName;
-		this.file = file;
 		tracks = new ArrayList<Track>();
 		savePlaylist();
 	}
 	
 	public void savePlaylist() {
 		BufferedReader reader;
+
 		try {
+			
 			reader = new BufferedReader(new FileReader(file));
 			String line = reader.readLine();
 			
@@ -34,8 +38,10 @@ public class Playlist {
 			}
 			
 			reader.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (FileNotFoundException e) {
+			System.err.println("File not found: " + file);
+			e.printStackTrace();
+		}catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
