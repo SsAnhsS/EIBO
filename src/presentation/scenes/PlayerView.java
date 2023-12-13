@@ -81,6 +81,7 @@ public class PlayerView extends BorderPane{
 		//Cover Image setup
 		Image image = new Image(getClass().getResourceAsStream("")); 
 		//Path:/EIBO/src/data/images/img-test-1.jpg
+		//C:\\Users\\Steph\\Documents\\GitHub\\EIBO\\src\\data\\images\\img-test-1.jpg
 		//Link Error make the Input Stream Null Error -> Need Fix
 		ImageView imageView = new ImageView(image);
 		ImageViewPane imagePane = new ImageViewPane(imageView);
@@ -89,6 +90,7 @@ public class PlayerView extends BorderPane{
 		VBox nameBox = new VBox();
 		
 		Label songName = new Label("Song Name");
+		songName.setId("song-name");
 		Label artistName = new Label("Artist Name");
 		
 		nameBox.getChildren().addAll(songName, artistName);

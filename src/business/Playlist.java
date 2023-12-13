@@ -1,6 +1,7 @@
 package business;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,7 +14,8 @@ public class Playlist {
 	private String playlistName;
 	private ArrayList<Track> tracks;
 	private Date creationDate; //LocalDate date = LocalDate.now();
-	private String file = "D:\\GitHub\\EIBO\\data\\playlist\\test.m3u";
+	//private File file = new File("business\\..\\..\\data\\playlist\\test.m3u");
+	private String file = "src\\data\\playlist\\test.m3u";
 	//D:\\GitHub\\EIBO\\data\\playlist\\test.m3
 	
 	public Playlist(String playlistName) {
