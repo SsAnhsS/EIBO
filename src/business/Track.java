@@ -19,7 +19,7 @@ public class Track {
 	private String soundFile;
 	
 	
-	public Track(String title, int length, String artist, String albumTitle, String soundFile) {
+	public Track(int id, String title, int length, String artist, String albumTitle, String soundFile) {
 		this.title = title;
 		this.length = length;
 		this.artist = artist;
@@ -37,7 +37,6 @@ public class Track {
 				title = id3v1Tag.getTitle();
 				artist = id3v1Tag.getArtist();
 				albumTitle = id3v1Tag.getAlbum();
-				
 			}
 			
 			//byte[] albumImageDate = idv2Tag.getAlbumImage();

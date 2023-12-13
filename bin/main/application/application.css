@@ -2,19 +2,26 @@
 
 .root{
 	-fx-background-color: black;
+  display: block;
+}
+.fontStyle{ 
+  -fx-font-size: 20px; 
+  -fx-font-family: "Times New Roman";
+  -fx-font-weight: bold; 
+}
+.label{
   -fx-text-fill: white;
-  -fx-font-weight: bold;
-  -fx-font-size: 20px;
-  
 }
 .icon-button{
-  -fx-min-width: 32;
-  -fx-min-height: 32;
+  -fx-min-width: 32px;
+  -fx-min-height: 32px;
+  -fx-padding: 5 5 5 5;
   -fx-background-color: transparent;
   -fx-background-repeat: no-repeat no-repeat;
   -fx-background-size: 28 28;
   -fx-background-position:center;
 }
+
 
 
 
