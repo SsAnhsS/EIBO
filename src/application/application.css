@@ -10,7 +10,7 @@
   -fx-font-weight: bold; 
 }
 .label{
-  -fx-text-fill: white;
+  -fx-text-fill: red;
 }
 .icon-button{
   -fx-min-width: 32px;
