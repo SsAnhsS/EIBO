@@ -65,7 +65,6 @@ public class PlayerView extends BorderPane{
 		leftBox.getChildren().addAll(playlist);
 		leftBox.setAlignment(Pos.BASELINE_CENTER);
 		leftBox.setPadding(sameInsets);
-		leftBox.setStyle("-fx-background-color: white;");
 	}
 	
 	public void setRightBox(HBox rightBox) {
@@ -73,13 +72,13 @@ public class PlayerView extends BorderPane{
 		rightBox.getChildren().addAll(setting);
 		rightBox.setAlignment(Pos.BASELINE_CENTER);
 		rightBox.setPadding(sameInsets);
-		rightBox.setStyle("-fx-background-color: white;");
 		
 	}
 	
 	public void setCenterBox(VBox centerBox) {
 		//Cover Image setup
 		Image image = new Image(getClass().getResourceAsStream("")); 
+		//..\\data\\images\\img-test-2.jpg
 		//Path:/EIBO/src/data/images/img-test-1.jpg
 		//C:\\Users\\Steph\\Documents\\GitHub\\EIBO\\src\\data\\images\\img-test-1.jpg
 		//Link Error make the Input Stream Null Error -> Need Fix
@@ -92,6 +91,7 @@ public class PlayerView extends BorderPane{
 		Label songName = new Label("Song Name");
 		songName.setId("song-name");
 		Label artistName = new Label("Artist Name");
+		artistName.setId("artist-name");
 		
 		nameBox.getChildren().addAll(songName, artistName);
 		
@@ -101,8 +101,7 @@ public class PlayerView extends BorderPane{
 		
 		centerBox.getChildren().addAll(imagePane, nameBox);
 		centerBox.setAlignment(Pos.BASELINE_CENTER);
-		centerBox.setPadding(sameInsets);
-		centerBox.setStyle("-fx-background-color: white;");		
+		centerBox.setPadding(sameInsets);		
 	}
 
 	public void setBottomBox(VBox bottomBox) {
@@ -129,7 +128,6 @@ public class PlayerView extends BorderPane{
 		volumeBox.setSpacing(DISTANCE);
 		volumeBox.setPrefWidth(sameWidth);
 		volumeBox.setAlignment(Pos.CENTER);
-		volumeBox.setStyle("-fx-background-color: white;");
 		
 		HBox playerBox = new HBox();
 		
@@ -142,7 +140,6 @@ public class PlayerView extends BorderPane{
 		playerBox.getChildren().addAll(skipbackButton, playButton, skipButton);
 		playerBox.setAlignment(Pos.CENTER);
 		playerBox.setPrefWidth(sameWidth);
-		playerBox.setStyle("-fx-background-color: white;");
 		
 		HBox shuffleBox = new HBox();
 		
@@ -154,16 +151,13 @@ public class PlayerView extends BorderPane{
 		shuffleBox.getChildren().addAll(shuffleButton, repeatButton);
 		shuffleBox.setAlignment(Pos.CENTER);
 		shuffleBox.setPrefWidth(sameWidth);
-		shuffleBox.setStyle("-fx-background-color: white;");
 		
 		controlBox.setPadding(sameInsets);
 		controlBox.setSpacing(DISTANCE);
 		controlBox.setAlignment(Pos.BOTTOM_CENTER);
 		controlBox.getChildren().addAll(volumeBox, playerBox, shuffleBox);
-		controlBox.setStyle("-fx-background-color: red;");
 		
 		bottomBox.getChildren().addAll(musicBar, controlBox);
-		bottomBox.setPadding(sameInsets);
-		bottomBox.setStyle("-fx-background-color: white;");		
+		bottomBox.setPadding(sameInsets);	
 	}
 }

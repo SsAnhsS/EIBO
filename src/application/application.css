@@ -9,11 +9,17 @@
   -fx-font-family: "Times New Roman";
   -fx-font-weight: bold; 
 }
-.label{
-  -fx-font-size: 40px; 
+.label{ 
+  -fx-font-size: 20px;
   -fx-text-fill: #415ee0;
   -fx-font-family: "Gelica";
   -fx-font-weight: bold;
+}
+#song-name{
+	-fx-font-size: 40px;
+}
+#artist-name{
+	-fx-font-size: 20px;
 }
 .button{
   -fx-background-color: #B9D6F3;
