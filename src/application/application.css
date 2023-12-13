@@ -1,7 +1,7 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
 .root{
-	-fx-background-color: black;
+	-fx-background-color: #F1E8D9;
   display: block;
 }
 .fontStyle{ 
@@ -10,13 +10,18 @@
   -fx-font-weight: bold; 
 }
 .label{
-  -fx-text-fill: red;
+  -fx-text-fill: #A1C9F1;
+  -fx-font-family: "Gelica";
+  -fx-font-weight: bold;
+}
+.button{
+  -fx-background-color: #B9D6F3;
 }
 .icon-button{
   -fx-min-width: 32px;
   -fx-min-height: 32px;
   -fx-padding: 5 5 5 5;
-  -fx-background-color: transparent;
+  -fx-background-color: #B9D6F3;
   -fx-background-repeat: no-repeat no-repeat;
   -fx-background-size: 28 28;
   -fx-background-position:center;
