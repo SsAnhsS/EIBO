@@ -10,7 +10,8 @@
   -fx-font-weight: bold; 
 }
 .label{
-  -fx-text-fill: #A1C9F1;
+  -fx-font-size: 40px; 
+  -fx-text-fill: #415ee0;
   -fx-font-family: "Gelica";
   -fx-font-weight: bold;
 }
