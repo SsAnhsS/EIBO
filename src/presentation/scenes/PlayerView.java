@@ -55,6 +55,7 @@ public class PlayerView extends BorderPane{
 		this.setBottom(bottomBox);
 		bottomBox.setId("bottom-box");
 		
+		
 	}
 	
 	public void setLeftBox(HBox leftBox) {
@@ -92,6 +93,8 @@ public class PlayerView extends BorderPane{
 		
 		Label artistName = new Label("Artist Name");
 		artistName.setId("artist-name");
+		Font font = Font.loadFont("/EIBO/src/assets/fonts/Almond.otf", 45);
+		artistName.setFont(font);
 		
 		nameBox.getChildren().addAll(songName, artistName);
 		
