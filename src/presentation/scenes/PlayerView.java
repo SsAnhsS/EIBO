@@ -89,6 +89,7 @@ public class PlayerView extends BorderPane{
 		
 		Label songName = new Label("Song Name");
 		songName.setId("song-name");
+		
 		Label artistName = new Label("Artist Name");
 		artistName.setId("artist-name");
 		
