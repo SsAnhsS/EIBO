@@ -93,7 +93,7 @@ public class PlayerView extends BorderPane{
 		
 		Label artistName = new Label("Artist Name");
 		artistName.setId("artist-name");
-		Font font = Font.loadFont("/EIBO/src/assets/fonts/Almond.otf", 45);
+		Font font = Font.loadFont("src\\assets\\fonts\\Almond.otf", 20);
 		artistName.setFont(font);
 		
 		nameBox.getChildren().addAll(songName, artistName);
