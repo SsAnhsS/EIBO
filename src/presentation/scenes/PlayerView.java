@@ -11,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.Font;
 import mp3player.scene.layout.ImageViewPane;
 
 public class PlayerView extends BorderPane{
@@ -52,10 +53,8 @@ public class PlayerView extends BorderPane{
 		VBox bottomBox = new VBox();
 		setBottomBox(bottomBox);
 		this.setBottom(bottomBox);
+		bottomBox.setId("bottom-box");
 		
-		BorderPane.setMargin(leftBox, new Insets(0,5,0,5));
-		BorderPane.setMargin(rightBox, new Insets(0,5,0,5));
-		BorderPane.setMargin(bottomBox, new Insets(5,0,5,0));
 	}
 	
 	public void setLeftBox(HBox leftBox) {
@@ -121,6 +120,7 @@ public class PlayerView extends BorderPane{
 		
 		HBox volumeBox = new HBox();
 		Label volumeLabel = new Label("Volume");
+		volumeLabel.setId("volume-label");
 		volume = new Text("60");
 		
 		volumeBox.getChildren().addAll(volumeLabel, volumeSlider, volume);
