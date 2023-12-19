@@ -17,8 +17,10 @@ import mp3player.scene.layout.ImageViewPane;
 public class PlayerView extends BorderPane{
 	
 	public final double DISTANCE = 10;
+	
 	public Button playlistButton;
 	public Button settingButton;
+	
 	public Insets sameInsets = new Insets(10);
 	public double sameWidth = 400;
 	
@@ -59,17 +61,23 @@ public class PlayerView extends BorderPane{
 	}
 	
 	public void setLeftBox(HBox leftBox) {
-		Button playlist = new Button ("Playlist");
-		playlist.setId("playlist-button");
+		playlistButton = new Button ("");
+		playlistButton.setId("playlist-button");
+		playlistButton.getStyleClass().add("icon-button");
+		playlistButton.getStyleClass().add("playlist-icon");
 		
-		leftBox.getChildren().addAll(playlist);
+		leftBox.getChildren().addAll(playlistButton);
 		leftBox.setAlignment(Pos.BASELINE_CENTER);
 		leftBox.setPadding(sameInsets);
 	}
 	
 	public void setRightBox(HBox rightBox) {
-		Button setting = new Button ("Setting");
-		rightBox.getChildren().addAll(setting);
+		settingButton = new Button ("");
+		settingButton.setId("setting-button");
+		settingButton.getStyleClass().add("icon-button");
+		settingButton.getStyleClass().add("setting-icon");
+		
+		rightBox.getChildren().addAll(settingButton);
 		rightBox.setAlignment(Pos.BASELINE_CENTER);
 		rightBox.setPadding(sameInsets);
 		
@@ -78,6 +86,7 @@ public class PlayerView extends BorderPane{
 	public void setCenterBox(VBox centerBox) {
 		//Cover Image setup
 		Image image = new Image(getClass().getResourceAsStream("")); 
+		//file:///D:/GitHub/EIBO/src/data/images/img-test-1.jpg
 		//..\\data\\images\\img-test-2.jpg
 		//Path:/EIBO/src/data/images/img-test-1.jpg
 		//C:\\Users\\Steph\\Documents\\GitHub\\EIBO\\src\\data\\images\\img-test-1.jpg
@@ -93,8 +102,6 @@ public class PlayerView extends BorderPane{
 		
 		Label artistName = new Label("Artist Name");
 		artistName.setId("artist-name");
-		Font font = Font.loadFont("src\\assets\\fonts\\Almond.otf", 20);
-		artistName.setFont(font);
 		
 		nameBox.getChildren().addAll(songName, artistName);
 		
@@ -123,11 +130,13 @@ public class PlayerView extends BorderPane{
 		HBox controlBox = new HBox();
 		
 		HBox volumeBox = new HBox();
-		Label volumeLabel = new Label("Volume");
-		volumeLabel.setId("volume-label");
+		Button volumeIcon = new Button("");
+		volumeIcon.setId("volume");
+		volumeIcon.getStyleClass().add("volume-icon");
+		
 		volume = new Text("60");
 		
-		volumeBox.getChildren().addAll(volumeLabel, volumeSlider, volume);
+		volumeBox.getChildren().addAll(volumeIcon, volumeSlider, volume);
 		volumeBox.setPadding(sameInsets);
 		volumeBox.setSpacing(DISTANCE);
 		volumeBox.setPrefWidth(sameWidth);
@@ -135,9 +144,18 @@ public class PlayerView extends BorderPane{
 		
 		HBox playerBox = new HBox();
 		
-		playButton = new Button("play");
-		skipButton = new Button ("next");
-		skipbackButton = new Button ("back");
+		playButton = new Button();
+		playButton.setId("play-button");
+		playButton.getStyleClass().add("icon-button");
+		playButton.getStyleClass().add("play-icon");
+		
+		skipButton = new Button ("");
+		skipButton.setId("skip-button");
+		skipButton.getStyleClass().add("skip-icon");
+		
+		skipbackButton = new Button ("");
+		skipbackButton.setId("skipback-button");
+		skipbackButton.getStyleClass().add("skipback-icon");
 		
 		playerBox.setPadding(sameInsets);
 		playerBox.setSpacing(DISTANCE);
@@ -147,8 +165,13 @@ public class PlayerView extends BorderPane{
 		
 		HBox shuffleBox = new HBox();
 		
-		shuffleButton = new Button ("shuffle"); 
-		repeatButton = new Button("repeat");
+		shuffleButton = new Button (""); 
+		shuffleButton.setId("shuffle-button");
+		shuffleButton.getStyleClass().add("shuffle-icon");
+		
+		repeatButton = new Button("");
+		repeatButton.setId("repeat-button");
+		repeatButton.getStyleClass().add("repeat-icon");
 		
 		shuffleBox.setPadding(sameInsets);
 		shuffleBox.setSpacing(DISTANCE);
