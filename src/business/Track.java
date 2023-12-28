@@ -35,6 +35,7 @@ public class Track {
 				albumTitle = id3v2Tag.getAlbum();
 				byte[] imageData = id3v2Tag.getAlbumImage();
 				photoCover = byteArrayToImage(imageData);
+				//save in folder in .jpg form and get that by link
 			}
 			
 		} catch (UnsupportedTagException e) {

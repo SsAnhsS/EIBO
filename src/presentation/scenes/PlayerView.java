@@ -77,14 +77,14 @@ public class PlayerView extends BorderPane{
 	}
 	
 	public void setRightBox(HBox rightBox) {
-		settingButton = new Button ("");
-		settingButton.setId("setting-button");
-		settingButton.getStyleClass().add("icon-button");
-		settingButton.getStyleClass().add("setting-icon");
-		
-		rightBox.getChildren().addAll(settingButton);
-		rightBox.setAlignment(Pos.BASELINE_CENTER);
-		rightBox.setPadding(sameInsets);
+//		settingButton = new Button ("");
+//		settingButton.setId("setting-button");
+//		settingButton.getStyleClass().add("icon-button");
+//		settingButton.getStyleClass().add("setting-icon");
+//		
+//		rightBox.getChildren().addAll(settingButton);
+//		rightBox.setAlignment(Pos.BASELINE_CENTER);
+//		rightBox.setPadding(sameInsets);
 		
 	}
 	

@@ -32,8 +32,22 @@ public class MP3Player {
 		play();
 	}
 	
+	public class PlayThread extends Thread{
+		public void run() {
+			playAudio();
+		}
+	}
+	
+	private void playAudio() {
+		
+	}
+	
 	public void play() {
 		audioPlayer.play();
+		PlayThread playThread = new PlayThread();
+		
+		playThread.setDaemon(true);
+		playAudio();
 	}
 	
 	public void pause() {
@@ -66,4 +80,5 @@ public class MP3Player {
 		//audioPlayer.setVolume(value); //minim error, Volume is not supported
 		audioPlayer.setGain(value); //not change the value
 	}
+	
 }

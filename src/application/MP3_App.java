@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import presentation.scenes.PlayerView;
 import presentation.scenes.PlayerViewController;
 import presentation.scenes.PlaylistView;
+import presentation.scenes.PlaylistViewController;
 
 public class MP3_App extends Application{
 	
@@ -29,7 +30,8 @@ public class MP3_App extends Application{
 		playerView = playerController.getRoot();
 		views.put(ViewName.PlayerView, playerView);
 		
-		playlistView = new PlaylistView();
+		PlaylistViewController playlistViewController = new PlaylistViewController(player);
+		playlistView = playlistViewController.getRoot();
 		views.put(ViewName.PlaylistView, playlistView);
 	}
 	
@@ -43,8 +45,8 @@ public class MP3_App extends Application{
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			
-			//switchView(ViewName.PlayerView);
-			switchView(ViewName.PlaylistView);
+			switchView(ViewName.PlayerView);
+			//switchView(ViewName.PlaylistView);
 			
 			primaryStage.setTitle("MP3 Application");
 			primaryStage.show();
@@ -63,6 +65,10 @@ public class MP3_App extends Application{
 		if(nextView != null) {
 			currentScene.setRoot(nextView);
 		}
+	}
+	
+	public void stop() {
+		
 	}
 	
 	public static void main(String [] args) {

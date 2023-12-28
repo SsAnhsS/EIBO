@@ -35,7 +35,7 @@ public class PlayerViewController {
 	
 	private MP3Player player;
 	
-	boolean isPlaying = false;
+	boolean isPlaying;
 	
 	long startTime;
 	long endTime;
@@ -80,41 +80,32 @@ public class PlayerViewController {
 		playButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
 			
 			public void handle(ActionEvent event) {
+				
 				if(isPlaying) {
 					isPlaying = false;
-					player.pause();
-					playButton.getStyleClass().add("play-icon");
-					playButton.getStyleClass().remove("pause-icon");
-					
+	                player.pause();
 				} else {
 					isPlaying = true;
-					player.play();
-					playButton.getStyleClass().add("pause-icon");
-					playButton.getStyleClass().remove("play-icon");
+	                player.play();
 				}
+				
+				updatePlayButtonStyle();
 			}
 		});
 		
-		skipButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-			
-			public void handle(ActionEvent event) {
-				player.skip();
-				isPlaying = true;
-				playButton.getStyleClass().add("pause-icon");
-				playButton.getStyleClass().remove("play-icon");
-				setInfo(player.track);
-			}
+		//set isSkipped = false, when true -> change the status -> else is same
+		skipButton.setOnAction(event ->{
+			player.skip();
+			isPlaying = true;
+			updatePlayButtonStyle();
+			setInfo(player.track);
 		});
 		
-		skipbackButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-			
-			public void handle(ActionEvent event) {
-				player.skipback();
-				isPlaying = true;
-				playButton.getStyleClass().add("pause-icon");
-				playButton.getStyleClass().remove("play-icon");
-				setInfo(player.track);
-			}
+		skipbackButton.setOnAction(event ->{
+			player.skipback();
+			isPlaying = true;
+			updatePlayButtonStyle();
+			setInfo(player.track);
 		});
 		
 		shuffleButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
@@ -175,7 +166,17 @@ public class PlayerViewController {
 			}
 		});
 	}
-
+	
+	public void updatePlayButtonStyle() {
+        if (isPlaying) {
+            playButton.getStyleClass().add("pause-icon");
+            playButton.getStyleClass().remove("play-icon");
+        } else {
+            playButton.getStyleClass().add("play-icon");
+            playButton.getStyleClass().remove("pause-icon");
+        }
+    }
+	
 	public Pane getRoot() {
 		return playerView;
 	}

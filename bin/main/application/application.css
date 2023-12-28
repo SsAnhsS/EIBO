@@ -23,6 +23,14 @@
   	-fx-margin: 0 5 0 5;
 }
 
+#padding-5px{
+	-fx-padding: 5 5 5 5;
+}
+
+#margin-5px{
+	-fx-margin: 5 5 5 5;
+}
+
 .icon-button{
 	-fx-min-width: 52px;
 	-fx-min-height: 52px;

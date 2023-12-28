@@ -2,39 +2,43 @@ package presentation.scenes;
 
 import java.util.List;
 
+import business.Track;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 
 public class PlaylistView extends TilePane{
 	
 	public final double DISTANCE = 10;
-	public Button playlistButton;
-	public Button settingButton;
-	private List<String> songs;
-	private int size = 5;
+	
+	public Label playlistName;
+	
+	public Button playerButton;
+	
+	public ListView <Track> playlist;
 	
 	public PlaylistView() {
-		HBox leftBox = new HBox();
+		VBox leftBox = new VBox();
 		
 		TilePane playlistNameBox = new TilePane();
-		Label playlistName = new Label("Playlist Test");
-		Button playerButton = new Button("Player");
+		playlistName = new Label("");
+		playerButton = new Button("");
 		
 		playlistNameBox.setHgap(DISTANCE);
 		playlistNameBox.setOrientation(Orientation.HORIZONTAL);
 		playlistNameBox.getChildren().addAll(playlistName, playerButton);
 		
-		ListView playlist = new ListView();
-		for (int i = 0; i < size; i++) {
-			playlist.getItems().add("name");
-		}
-		HBox playlistBox = new HBox(playlist);
+		playlist = new ListView();
 		
-		leftBox.getChildren().addAll(playlistNameBox, playlistBox);
+		//playlist.getStyleClass().add("margin-5px");
+		
+		//leftBox.getStyleClass().add("margin-5px");
+		leftBox.getChildren().addAll(playlistNameBox, playlist);
+		leftBox.setMaxWidth(430);
 		
 		HBox rightBox = new HBox();
 		
