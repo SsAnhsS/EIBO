@@ -1,5 +1,5 @@
 package application;
 
 public enum ViewName {
-	PlayerView, PlaylistView, SettingView
+	PlayerView, PlaylistView
 }

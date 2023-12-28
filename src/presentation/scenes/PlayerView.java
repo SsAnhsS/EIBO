@@ -112,7 +112,7 @@ public class PlayerView extends BorderPane{
 		nameBox.getChildren().addAll(songName, artistName);
 		
 		nameBox.setPadding(sameInsets);
-		nameBox.setAlignment(Pos.BASELINE_CENTER);
+		nameBox.setAlignment(Pos.BOTTOM_CENTER);
 		nameBox.setSpacing(DISTANCE);
 		
 		centerBox.getChildren().addAll(imagePane, nameBox);

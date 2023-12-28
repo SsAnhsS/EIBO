@@ -16,9 +16,6 @@ public class MP3_App extends Application{
 	private Stage primaryStage;
 	private HashMap<ViewName, Pane> views;
 	
-	//private Stage mainWindow;
-	//private Scene mainScene;
-	
 	private Pane playerView;
 	private Pane playlistView;
 	

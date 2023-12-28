@@ -20,4 +20,8 @@ public class PlaylistManager {
 	public String getPlaylistName() {
 		return playlistName;
 	}
+	
+	public ArrayList <String> getTrackNames(){
+		return playlist.getTrackNames();
+	}
 }
