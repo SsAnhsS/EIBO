@@ -35,13 +35,13 @@
 #playlist-button.playlist-icon{
 	-fx-background-size: 48 48;
 	-fx-background-color: transparent;
-	-fx-background-image: url("src/assets/icons/icon-playlist-48.png");
+	-fx-background-image: url("../../../src/assets/icons/icon-playlist-48.png");
 }
 
 #setting-button.setting-icon{
 	-fx-background-size: 48 48;
 	-fx-background-color: transparent;
-	-fx-background-image: url("src/assets/icons/icon-setting-48.png");
+	-fx-background-image: url("../../../src/assets/icons/icon-setting-48.png");
 }
 
 #volume.volume-icon{
@@ -50,17 +50,17 @@
 	-fx-background-color: transparent;
 	-fx-background-size: 28 28;
   	-fx-background-position:center;
-  	-fx-background-image: url("src/assets/icons/icon-volume-48.png");
+  	-fx-background-image: url("../../../src/assets/icons/icon-volume-48.png");
 }
 
 #play-button.play-icon {
   	-fx-background-radius: 26;
-	-fx-background-image: url("src/assets/icons/icon-play-48.png");
+	-fx-background-image: url("../../../src/assets/icons/icon-play-48.png");
 }
 
 #play-button.pause-icon {
     -fx-background-radius: 26;
-	-fx-background-image: url("src/assets/icons/icon-pause-48.png");
+	-fx-background-image: url("../../../src/assets/icons/icon-pause-48.png");
 }
 
 #skip-button.skip-icon {
@@ -71,7 +71,7 @@
   	-fx-background-repeat: no-repeat no-repeat;
 	-fx-background-size: 24 24;
   	-fx-background-position:center;
-	-fx-background-image: url("src/assets/icons/icon-skip-48.png");
+	-fx-background-image: url("../../../src/assets/icons/icon-skip-48.png");
 }
 
 #skipback-button.skipback-icon{
@@ -82,7 +82,7 @@
   	-fx-background-repeat: no-repeat no-repeat;
 	-fx-background-size: 24 24;
   	-fx-background-position:center;
-	-fx-background-image: url("src/assets/icons/icon-skip-back-48.png");
+	-fx-background-image: url("../../../src/assets/icons/icon-skip-back-48.png");
 }
 
 #shuffle-button.shuffle-icon{
@@ -92,7 +92,7 @@
   	-fx-background-repeat: no-repeat no-repeat;
 	-fx-background-size: 30 30;
   	-fx-background-position:center;
-  	-fx-background-image: url("src/assets/icons/icon-shuffle-48.png");
+  	-fx-background-image: url("../../../src/assets/icons/icon-shuffle-48.png");
 }
 
 #repeat-button.repeat-icon{
@@ -102,7 +102,7 @@
   	-fx-background-repeat: no-repeat no-repeat;
 	-fx-background-size: 30 30;
   	-fx-background-position:center;
-  	-fx-background-image: url("src/assets/icons/icon-repeat-48.png");
+  	-fx-background-image: url("../../../src/assets/icons/icon-repeat-48.png");
 }
 
 #repeat-button.repeat-one-icon{
@@ -112,5 +112,5 @@
   	-fx-background-repeat: no-repeat no-repeat;
 	-fx-background-size: 30 30;
   	-fx-background-position:center;
-  	-fx-background-image: url("src/assets/icons/icon-repeat-one-48.png");
+  	-fx-background-image: url("../../../src/assets/icons/icon-repeat-one-48.png");
 }

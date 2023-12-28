@@ -126,7 +126,7 @@ public class PlayerViewController {
 					isShuffling = false;
 				}
 				else {
-					shuffleButton.setOpacity(0.6);
+					shuffleButton.setOpacity(0.5);
 					isShuffling = true;
 				}
 			}
@@ -154,7 +154,7 @@ public class PlayerViewController {
 					else {
 						repeatButton.getStyleClass().add("repeat-icon");
 						repeatButton.getStyleClass().remove("repeat-one-icon");
-						repeatButton.setOpacity(0.6);
+						repeatButton.setOpacity(0.5);
 						isRepeating = true;
 					}
 				}

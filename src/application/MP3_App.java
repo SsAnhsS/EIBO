@@ -43,8 +43,8 @@ public class MP3_App extends Application{
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			
-			switchView(ViewName.PlayerView);
-			//switchView(ViewName.PlaylistView);
+			//switchView(ViewName.PlayerView);
+			switchView(ViewName.PlaylistView);
 			
 			primaryStage.setTitle("MP3 Application");
 			primaryStage.show();
