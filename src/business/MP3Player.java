@@ -1,4 +1,7 @@
 package business;
+
+import java.util.ArrayList;
+
 import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 
@@ -6,24 +9,23 @@ public class MP3Player {
 	
 	private SimpleMinim minim;
 	private SimpleAudioPlayer audioPlayer;
-	private Playlist actPlaylist;
-	private Track actTrack;
-	private int trackNo;
 	
+	private PlaylistManager playlistManager;
+	public Playlist playlist;
+	public Track track;
 	
 	public MP3Player() {
+		playlistManager = new PlaylistManager();
+		playlist = playlistManager.getPlaylist();
+		track = playlist.getTrack(0);
 		minim = new SimpleMinim(true);
-		audioPlayer = new SimpleAudioPlayer(null, true);
+		audioPlayer = new SimpleAudioPlayer(null, false);
+		audioPlayer = minim.loadMP3File(track.getSoundFile());
 	}
 	
 	public void setPlaylist(Playlist list) {
-		actPlaylist = list;
+		playlist = list;
 	}
-	
-	public void selectTrack(int no) {
-		actTrack = actPlaylist.getTrack(no);
-	}
-	
 	
 	public void play(String fileName) {
 		audioPlayer = minim.loadMP3File(fileName);
@@ -38,20 +40,30 @@ public class MP3Player {
 		audioPlayer.pause();
 	}
 	
-	//trackNo +1 -> play
 	public void skip() {
+		pause();
+		int index = playlist.getIndex(track);
 		
+		if(index < playlist.totalTracks() - 1) {
+			track = playlist.getTrack(index + 1);
+		} else track = playlist.getTrack(0);
+		
+		play(track.getSoundFile());
 	}
 	
-	
-	//trackNo -1 -> play
-	public void skipBack() {
+	public void skipback() {
+		pause();
+		int index = playlist.getIndex(track);
 		
+		if(index > 0) {
+			track = playlist.getTrack(index - 1);
+		} else track = playlist.getTrack(playlist.totalTracks() - 1);
+		
+		play(track.getSoundFile());
 	}
 	
 	public void volume(float value) {
-		audioPlayer.setVolume(value); //minim error, Volume is not supported
+		//audioPlayer.setVolume(value); //minim error, Volume is not supported
 		audioPlayer.setGain(value); //not change the value
-		System.out.println(audioPlayer.getGain());
 	}
 }

@@ -24,6 +24,11 @@ public class PlayerView extends BorderPane{
 	public Insets sameInsets = new Insets(10);
 	public double sameWidth = 400;
 	
+	public Label songName;
+	public Label artistName;
+	
+	public Image image;
+	
 	public Button playButton;
 	public Button skipButton;
 	public Button skipbackButton;
@@ -85,7 +90,7 @@ public class PlayerView extends BorderPane{
 	
 	public void setCenterBox(VBox centerBox) {
 		//Cover Image setup
-		Image image = new Image(getClass().getResourceAsStream("")); 
+		image = new Image(getClass().getResourceAsStream("")); 
 		//file:///D:/GitHub/EIBO/src/data/images/img-test-1.jpg
 		//..\\data\\images\\img-test-2.jpg
 		//Path:/EIBO/src/data/images/img-test-1.jpg
@@ -93,14 +98,15 @@ public class PlayerView extends BorderPane{
 		//Link Error make the Input Stream Null Error -> Need Fix
 		ImageView imageView = new ImageView(image);
 		ImageViewPane imagePane = new ImageViewPane(imageView);
+		this.setCenter(imagePane);
 		
 		//nameBox setup
 		VBox nameBox = new VBox();
 		
-		Label songName = new Label("Song Name");
+		songName = new Label("");
 		songName.setId("song-name");
 		
-		Label artistName = new Label("Artist Name");
+		artistName = new Label("");
 		artistName.setId("artist-name");
 		
 		nameBox.getChildren().addAll(songName, artistName);
@@ -120,7 +126,7 @@ public class PlayerView extends BorderPane{
 		HBox musicBar = new HBox();
 		
 		musicProgress.setPrefWidth(1000);
-		time = new Text("0 / Total Time");
+		time = new Text("");
 		
 		musicBar.getChildren().addAll(musicProgress, time);
 		musicBar.setAlignment(Pos.CENTER);

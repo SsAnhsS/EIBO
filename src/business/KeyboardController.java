@@ -14,14 +14,14 @@ public class KeyboardController {
 		mp3Player = new MP3Player();
 		playlistManager = new PlaylistManager();
 		
-		ArrayList <String> tracksName = playlistManager.getTrackName();
+		ArrayList <String> tracksName = playlistManager.getTrackNames();
 		
 		String playingFile = "01 Bring Mich Nach Hause.mp3";
 		
 		String line;
 		do {
 			for(String s : tracksName) {
-				System.out.println(tracksName.indexOf(s) + " " + s);
+				System.out.println((tracksName.indexOf(s) + 1) + " " + s);
 			}
 			System.out.print("Kommand: ");
 			line = StaticScanner.nextString();
@@ -37,8 +37,8 @@ public class KeyboardController {
 			case "play":
 				if (commands.length > 1) {
 					playingFile = mergeName(commands) + ".mp3";
-					mp3Player.play("/EIBO/src/data/mp3-songs/" + playingFile);
-				}	
+				}
+				mp3Player.play("src//data//mp3-songs//" + playingFile);
 				break;
 			case "pause":
 				mp3Player.pause();

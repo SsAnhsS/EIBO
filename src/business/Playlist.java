@@ -11,9 +11,7 @@ public class Playlist {
 	private String playlistName;
 	private ArrayList<Track> tracks;
 	private Date creationDate; //LocalDate date = LocalDate.now();
-	//private File file = new File("business\\..\\..\\data\\playlist\\test.m3u");
 	private String file = "src\\data\\playlist\\test.m3u";
-	//D:\\GitHub\\EIBO\\data\\playlist\\test.m3
 	
 	public Playlist(String playlistName) {
 		this.playlistName = playlistName;
@@ -45,15 +43,26 @@ public class Playlist {
 		}
 	}
 	
-	public Track getTrack(int number) {
+	public Track getTrack(int n) {
 		for(Track aktTrack : tracks) {
-			if(number == tracks.indexOf(aktTrack) + 1)
+			if(n == tracks.indexOf(aktTrack)) {
 				return aktTrack;
+			}
 		}
 		return null;
 	}
 	
-	public int numberOfTracks() {
+	public int getIndex(Track track) {
+		int index = 0;
+		for(Track aktTrack : tracks) {
+			if(track.equals(aktTrack)) {
+				index = tracks.indexOf(aktTrack);
+			}
+		}
+		return index;
+	}
+	
+	public int totalTracks() {
 		return tracks.size();
 	}
 	
@@ -61,7 +70,7 @@ public class Playlist {
 		return (ArrayList<Track>) tracks;
 	}
 	
-	public ArrayList<String> getTrackName(){
+	public ArrayList<String> getTrackNames(){
 		ArrayList<String> names = new ArrayList<>();
 		for(Track aktTrack : tracks) {
 			names.add(aktTrack.getTitle());

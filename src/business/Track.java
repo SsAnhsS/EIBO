@@ -1,8 +1,12 @@
 package business;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import com.mpatric.mp3agic.ID3v1;
+import javax.imageio.ImageIO;
+
+import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
@@ -15,31 +19,23 @@ public class Track {
 	private int length;
 	private String artist;
 	private String albumTitle;
-	private String photoCover; //cover image link
+	private BufferedImage photoCover;
 	private String soundFile;
 	
-	
-	public Track(int id, String title, int length, String artist, String albumTitle, String soundFile) {
-		this.title = title;
-		this.length = length;
-		this.artist = artist;
-		this.albumTitle = albumTitle;
-		this.soundFile = soundFile;
-	}
-	
 	public Track(String soundFile) {
+		this.soundFile = soundFile;
 		
 		try {
 			mp3File = new Mp3File(soundFile);
 			length = (int) mp3File.getLengthInSeconds();
-			if(mp3File.hasId3v1Tag()) {
-				ID3v1 id3v1Tag = mp3File.getId3v1Tag();
-				title = id3v1Tag.getTitle();
-				artist = id3v1Tag.getArtist();
-				albumTitle = id3v1Tag.getAlbum();
+			if(mp3File.hasId3v2Tag()) {
+				ID3v2 id3v2Tag = mp3File.getId3v2Tag();
+				title = id3v2Tag.getTitle();
+				artist = id3v2Tag.getArtist();
+				albumTitle = id3v2Tag.getAlbum();
+				byte[] imageData = id3v2Tag.getAlbumImage();
+				photoCover = byteArrayToImage(imageData);
 			}
-			
-			//byte[] albumImageDate = idv2Tag.getAlbumImage();
 			
 		} catch (UnsupportedTagException e) {
 			// TODO Auto-generated catch block
@@ -55,8 +51,27 @@ public class Track {
 		
 	}
 	
+	public String getSoundFile() {
+		return soundFile;
+	}
+	
 	public void setSoundFile(String file) {
 		soundFile = file;
+	}
+
+	public BufferedImage byteArrayToImage(byte[] bytes){  
+        BufferedImage bufferedImage = null;
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
+        try {
+			bufferedImage = ImageIO.read(inputStream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        return bufferedImage;
+	}
+	
+	public BufferedImage getPhotoCover() {
+		return photoCover;
 	}
 	
 	public String getTitle() {
@@ -71,11 +86,8 @@ public class Track {
 		return artist;
 	}
 	
-	public String albumTitle() {
+	public String getAlbumTitle() {
 		return albumTitle;
 	}
 	
-	public String soundFile() {
-		return soundFile;
-	}
 }

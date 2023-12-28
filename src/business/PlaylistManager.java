@@ -5,21 +5,19 @@ import java.util.ArrayList;
 public class PlaylistManager {
 	
 	private Playlist playlist;
-	private String playlistName;	
-	private ArrayList<Track> tracks;
+	private String playlistName;
 	
 	
 	public PlaylistManager() {
-		playlistName = "test";
+		playlistName = "Test";
 		playlist = new Playlist (playlistName);
-		tracks = playlist.getTracks();
+	}
+	
+	public Playlist getPlaylist() {
+		return playlist;
 	}
 	
 	public String getPlaylistName() {
 		return playlistName;
-	}
-	
-	public ArrayList<String> getTrackName(){
-		return playlist.getTrackName();
 	}
 }
