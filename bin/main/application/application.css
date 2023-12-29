@@ -46,12 +46,6 @@
 	-fx-background-image: url("../../../src/assets/icons/icon-playlist-48.png");
 }
 
-#setting-button.setting-icon{
-	-fx-background-size: 48 48;
-	-fx-background-color: transparent;
-	-fx-background-image: url("../../../src/assets/icons/icon-setting-48.png");
-}
-
 #volume.volume-icon{
 	-fx-min-width: 32px;
   	-fx-min-height: 32px;

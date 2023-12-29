@@ -1,9 +1,12 @@
 package presentation.scenes;
 
+import java.io.File;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,7 +14,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.scene.text.Font;
 import mp3player.scene.layout.ImageViewPane;
 
 public class PlayerView extends BorderPane{
@@ -35,72 +37,29 @@ public class PlayerView extends BorderPane{
 	public Button shuffleButton;
 	public Button repeatButton;
 	
-	public Slider musicProgress = new Slider(0, 100, 0);
+	public ProgressBar musicProgress;
 	public Text time;
 	public Slider volumeSlider = new Slider(0, 100, 60);
 	public Text volume;
 	
 	public PlayerView() {
-		//leftBox setup
-		HBox leftBox = new HBox();
-		setLeftBox(leftBox);
-		this.setLeft(leftBox);
 		
-		//rightBox setup
-		HBox rightBox = new HBox();
-		setRightBox(rightBox);
-		this.setRight(rightBox);
+		HBox topBox = new HBox();
+		setTopBox(topBox);
+		this.setTop(topBox);
 		
-		//centerBox setup
-		VBox centerBox = new VBox();
+		HBox centerBox = new HBox();
 		setCenterBox(centerBox);
 		this.setCenter(centerBox);
 		
-		//bottonBox setup
-		VBox bottomBox = new VBox();
+		HBox bottomBox = new HBox();
 		setBottomBox(bottomBox);
 		this.setBottom(bottomBox);
-		bottomBox.setId("bottom-box");
-		
-		
 	}
 	
-	public void setLeftBox(HBox leftBox) {
-		playlistButton = new Button ("");
-		playlistButton.setId("playlist-button");
-		playlistButton.getStyleClass().add("icon-button");
-		playlistButton.getStyleClass().add("playlist-icon");
+	public void setTopBox(HBox topBox) {
+		VBox leftBox = new VBox();
 		
-		leftBox.getChildren().addAll(playlistButton);
-		leftBox.setAlignment(Pos.BASELINE_CENTER);
-		leftBox.setPadding(sameInsets);
-	}
-	
-	public void setRightBox(HBox rightBox) {
-//		settingButton = new Button ("");
-//		settingButton.setId("setting-button");
-//		settingButton.getStyleClass().add("icon-button");
-//		settingButton.getStyleClass().add("setting-icon");
-//		
-//		rightBox.getChildren().addAll(settingButton);
-//		rightBox.setAlignment(Pos.BASELINE_CENTER);
-//		rightBox.setPadding(sameInsets);
-		
-	}
-	
-	public void setCenterBox(VBox centerBox) {
-		//Cover Image setup
-		image = new Image(getClass().getResourceAsStream("")); 
-		//file:///D:/GitHub/EIBO/src/data/images/img-test-1.jpg
-		//..\\data\\images\\img-test-2.jpg
-		//Path:/EIBO/src/data/images/img-test-1.jpg
-		//C:\\Users\\Steph\\Documents\\GitHub\\EIBO\\src\\data\\images\\img-test-1.jpg
-		//Link Error make the Input Stream Null Error -> Need Fix
-		ImageView imageView = new ImageView(image);
-		ImageViewPane imagePane = new ImageViewPane(imageView);
-		this.setCenter(imagePane);
-		
-		//nameBox setup
 		VBox nameBox = new VBox();
 		
 		songName = new Label("");
@@ -112,41 +71,75 @@ public class PlayerView extends BorderPane{
 		nameBox.getChildren().addAll(songName, artistName);
 		
 		nameBox.setPadding(sameInsets);
-		nameBox.setAlignment(Pos.BOTTOM_CENTER);
+		nameBox.setAlignment(Pos.CENTER_RIGHT);
 		nameBox.setSpacing(DISTANCE);
+		nameBox.setMinHeight(500);
 		
-		centerBox.getChildren().addAll(imagePane, nameBox);
-		centerBox.setAlignment(Pos.BASELINE_CENTER);
-		centerBox.setPadding(sameInsets);		
+		HBox shuffleBox = new HBox();
+		
+		shuffleButton = new Button (""); 
+		shuffleButton.setId("shuffle-button");
+		shuffleButton.getStyleClass().add("shuffle-icon");
+		
+		repeatButton = new Button("");
+		repeatButton.setId("repeat-button");
+		repeatButton.getStyleClass().add("repeat-icon");
+		
+		shuffleBox.setPadding(sameInsets);
+		shuffleBox.setSpacing(DISTANCE);
+		shuffleBox.getChildren().addAll(shuffleButton, repeatButton);
+		shuffleBox.setAlignment(Pos.CENTER_LEFT);
+		
+		leftBox.getChildren().addAll(nameBox, shuffleBox);
+		leftBox.setMinWidth(700);
+		leftBox.setPadding(sameInsets);
+		
+		//Cover Image setup
+		VBox rightBox = new VBox();
+		image = new Image(getClass().getResourceAsStream(""));
+		//new FileInputStream("src\\data\\images\\img-test-1.jpg")
+		//file:///D:/GitHub/EIBO/src/data/images/img-test-1.jpg
+		//..\\data\\images\\img-test-2.jpg
+		//Path:/EIBO/src/data/images/img-test-1.jpg
+		//C:\\Users\\Steph\\Documents\\GitHub\\EIBO\\src\\data\\images\\img-test-1.jpg		
+		//Link Error make the Input Stream Null Error -> Need Fix		
+		ImageView imageView = new ImageView(image);
+		ImageViewPane imagePane = new ImageViewPane(imageView);
+		imagePane.setMinSize(400, 400);
+		imagePane.setStyle("-fx-background-color: #ffffff");
+		
+		rightBox.getChildren().add(imagePane);
+		
+		rightBox.setAlignment(Pos.CENTER);
+		
+		topBox.getChildren().addAll(leftBox, rightBox);
+		topBox.setAlignment(Pos.CENTER);
+		topBox.setSpacing(DISTANCE);
+		topBox.setMinHeight(600);
 	}
-
-	public void setBottomBox(VBox bottomBox) {
-		
-		//Music-Process-Bar setup
-		HBox musicBar = new HBox();
-		
-		musicProgress.setPrefWidth(1000);
+	
+	public void setCenterBox(HBox centerBox) {
+		musicProgress = new ProgressBar(0);
+		musicProgress.setPrefWidth(1100);
+		musicProgress.setPrefHeight(12);
 		time = new Text("");
 		
-		musicBar.getChildren().addAll(musicProgress, time);
-		musicBar.setAlignment(Pos.CENTER);
-		musicBar.setSpacing(DISTANCE);
+		centerBox.getChildren().addAll(musicProgress, time);
+		centerBox.setAlignment(Pos.CENTER);
+		centerBox.setSpacing(DISTANCE);
+	}
+	
+	public void setBottomBox(HBox bottomBox) {
+		HBox playlistBox = new HBox();
 		
-		//controlBox Setup
-		HBox controlBox = new HBox();
+		playlistButton = new Button ("");
+		playlistButton.setId("playlist-button");
+		playlistButton.getStyleClass().add("icon-button");
+		playlistButton.getStyleClass().add("playlist-icon");
 		
-		HBox volumeBox = new HBox();
-		Button volumeIcon = new Button("");
-		volumeIcon.setId("volume");
-		volumeIcon.getStyleClass().add("volume-icon");
-		
-		volume = new Text("60");
-		
-		volumeBox.getChildren().addAll(volumeIcon, volumeSlider, volume);
-		volumeBox.setPadding(sameInsets);
-		volumeBox.setSpacing(DISTANCE);
-		volumeBox.setPrefWidth(sameWidth);
-		volumeBox.setAlignment(Pos.CENTER);
+		playlistBox.getChildren().add(playlistButton);
+		playlistBox.setAlignment(Pos.CENTER);
+		playlistBox.setPrefWidth(sameWidth);
 		
 		HBox playerBox = new HBox();
 		
@@ -169,28 +162,22 @@ public class PlayerView extends BorderPane{
 		playerBox.setAlignment(Pos.CENTER);
 		playerBox.setPrefWidth(sameWidth);
 		
-		HBox shuffleBox = new HBox();
+		HBox volumeBox = new HBox();
+		Button volumeIcon = new Button("");
+		volumeIcon.setId("volume");
+		volumeIcon.getStyleClass().add("volume-icon");
 		
-		shuffleButton = new Button (""); 
-		shuffleButton.setId("shuffle-button");
-		shuffleButton.getStyleClass().add("shuffle-icon");
+		volume = new Text("60");
 		
-		repeatButton = new Button("");
-		repeatButton.setId("repeat-button");
-		repeatButton.getStyleClass().add("repeat-icon");
+		volumeBox.getChildren().addAll(volumeIcon, volumeSlider, volume);
+		volumeBox.setPadding(sameInsets);
+		volumeBox.setSpacing(DISTANCE);
+		volumeBox.setPrefWidth(sameWidth);
+		volumeBox.setAlignment(Pos.CENTER);
 		
-		shuffleBox.setPadding(sameInsets);
-		shuffleBox.setSpacing(DISTANCE);
-		shuffleBox.getChildren().addAll(shuffleButton, repeatButton);
-		shuffleBox.setAlignment(Pos.CENTER);
-		shuffleBox.setPrefWidth(sameWidth);
-		
-		controlBox.setPadding(sameInsets);
-		controlBox.setSpacing(DISTANCE);
-		controlBox.setAlignment(Pos.BOTTOM_CENTER);
-		controlBox.getChildren().addAll(volumeBox, playerBox, shuffleBox);
-		
-		bottomBox.getChildren().addAll(musicBar, controlBox);
-		bottomBox.setPadding(sameInsets);	
+		bottomBox.getChildren().addAll(playlistBox, playerBox, volumeBox);
+		bottomBox.setAlignment(Pos.CENTER);
+		bottomBox.setSpacing(DISTANCE);
+		bottomBox.setMinHeight(150);
 	}
 }

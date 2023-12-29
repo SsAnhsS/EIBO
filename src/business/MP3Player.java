@@ -39,7 +39,15 @@ public class MP3Player {
 	}
 	
 	private void playAudio() {
-		
+		for(int i = 0; i < 10; i++) {
+			try {
+				Thread.sleep(1000);
+			}
+			catch(InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.println("playing " + i);
+		}
 	}
 	
 	public void play() {
@@ -47,7 +55,7 @@ public class MP3Player {
 		PlayThread playThread = new PlayThread();
 		
 		playThread.setDaemon(true);
-		playAudio();
+		playThread.start();
 	}
 	
 	public void pause() {

@@ -2,16 +2,21 @@ package presentation.scenes;
 
 import business.MP3Player;
 import business.Track;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 public class PlayerViewController {
 
@@ -28,18 +33,17 @@ public class PlayerViewController {
 	Button shuffleButton;
 	Button repeatButton;
 	
-	Slider musicProgress;
+	ProgressBar musicProgress;
 	Text time;
+	Timeline timeline;
+	double DURATION_SECONDS;
+	
 	Slider volumeSlider;
 	Text volume;
 	
 	private MP3Player player;
 	
 	boolean isPlaying;
-	
-	long startTime;
-	long endTime;
-	int elapsedTime = 0;
 	
 	public PlayerViewController(MP3Player player) {
 		playerView = new PlayerView();
@@ -72,8 +76,28 @@ public class PlayerViewController {
 		songName.setText(aktTrack.getTitle());
 		artistName.setText(aktTrack.getArtist());
 		//image = aktTrack.getPhotoCover();
-		time.setText(elapsedTime/60 + ":" + elapsedTime%60 + " / " + aktTrack.getLength()/60 + ":" + aktTrack.getLength()%60);
+		DURATION_SECONDS = aktTrack.getLength();
+		time.setText(aktTrack.getLength()/60 + ":" + aktTrack.getLength()%60);
 	}
+	
+//	private void playMusic() {
+//        // Reset progress bar and timeline
+//        musicProgress.setProgress(0.0);
+//        
+//        if (timeline != null) {
+//            timeline.stop();
+//        }
+//
+//        // Create a timeline to update the progress bar
+//        timeline = new Timeline(
+//                new KeyFrame(Duration.ZERO, e -> musicProgress.setProgress(0)),
+//                new KeyFrame(Duration.seconds(DURATION_SECONDS), e -> musicProgress.setProgress(1))
+//        );
+//        timeline.setCycleCount(1); // Play only once
+//
+//        // Play the timeline
+//        timeline.play();
+//    }
 	
 	private void initialize() {
 		
@@ -81,15 +105,22 @@ public class PlayerViewController {
 			
 			public void handle(ActionEvent event) {
 				
-				if(isPlaying) {
-					isPlaying = false;
-	                player.pause();
-				} else {
-					isPlaying = true;
-	                player.play();
-				}
+				new Thread() {
+					
+					public void run() {
+						if(isPlaying) {
+							isPlaying = false;
+							Platform.runLater(() -> updatePlayButtonStyle());
+			                player.pause();
+						} else {
+							isPlaying = true;
+							Platform.runLater(() -> updatePlayButtonStyle());
+			                player.play();
+						}
+						
+					}
+				}.start();
 				
-				updatePlayButtonStyle();
 			}
 		});
 		
@@ -152,12 +183,6 @@ public class PlayerViewController {
 			}
 		});
 		
-		musicProgress.valueProperty().addListener(new ChangeListener<Number>() {
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				time.setText(newValue.intValue() + " / " + player.track.getLength());
-			}
-		});
-		
 		volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				float gainValue = newValue.intValue() - oldValue.intValue();
@@ -167,7 +192,7 @@ public class PlayerViewController {
 		});
 	}
 	
-	public void updatePlayButtonStyle() {
+	private void updatePlayButtonStyle() {
         if (isPlaying) {
             playButton.getStyleClass().add("pause-icon");
             playButton.getStyleClass().remove("play-icon");

@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import business.MP3Player;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -68,7 +69,7 @@ public class MP3_App extends Application{
 	}
 	
 	public void stop() {
-		
+		System.exit(0);
 	}
 	
 	public static void main(String [] args) {
