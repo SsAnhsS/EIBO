@@ -1,10 +1,14 @@
 package business;
 
-
 import java.util.ArrayList;
 
 import de.hsrm.mi.prog.util.StaticScanner;
 
+/**KeyboardController Klasse, um Mp3 Player in der Console zu kontrollieren
+ * 
+ * @author Thi Hai Anh, Luong _ 1176913
+ * @author Khanh Linh, Truong _ 1257179
+ */
 public class KeyboardController {
 	
 	private MP3Player mp3Player;
@@ -51,6 +55,11 @@ public class KeyboardController {
 		
 	}
 	
+	/**
+	 * Song-Name mergen aus String Array von Kommand
+	 * @param String Array
+	 * @return Name
+	 */
 	public String mergeName (String [] commands) {
 		StringBuffer sb = new StringBuffer();
 		for (int i = 1; i < commands.length; i++) {

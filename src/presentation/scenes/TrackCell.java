@@ -13,6 +13,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import mp3player.scene.layout.ImageViewPane;
 
+/**Track Cell Klasse
+ * Cell von ListView<Track> einstellen
+ * 
+ * @author Thi Hai Anh, Luong _ 1176913
+ * @author Khanh Linh, Truong _ 1257179
+ */
 public class TrackCell extends ListCell<Track>{
 	
 	public final double DISTANCE = 10;
@@ -46,6 +52,9 @@ public class TrackCell extends ListCell<Track>{
 		trackBox.setPadding(insets);
 	}
 	
+	/**
+	 * Informationen von Track update in Cell
+	 */
 	protected void updateItem(Track item, boolean empty) {
 		super.updateItem(item, empty);
 		

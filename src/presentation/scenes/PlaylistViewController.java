@@ -17,6 +17,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 
+/**Playlist View Controller Klasse
+ * Playlist View kontrollieren
+ * 
+ * @author Thi Hai Anh, Luong _ 1176913
+ * @author Khanh Linh, Truong _ 1257179
+ */
 public class PlaylistViewController {
 
 	PlaylistView playlistView;

@@ -13,6 +13,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import mp3player.scene.layout.ImageViewPane;
 
+/**Player View Klasse
+ * Player View einstellen
+ * 
+ * @author Thi Hai Anh, Luong _ 1176913
+ * @author Khanh Linh, Truong _ 1257179
+ */
 public class PlayerView extends BorderPane{
 	
 	public final double DISTANCE = 10;
@@ -54,7 +60,18 @@ public class PlayerView extends BorderPane{
 		this.setBottom(bottomBox);
 	}
 	
+	/**
+	 * Top-Box von Player View einstellen
+	 * Top-Box:
+	 * 		- left-box
+	 * 			+ name-box
+	 * 			+ shuffle-box
+	 * 		- right-box
+	 * 			+ image-view-pane
+	 * @param topBox
+	 */
 	public void setTopBox(HBox topBox) {
+		//Left-Box einstellen
 		VBox leftBox = new VBox();
 		
 		VBox nameBox = new VBox();
@@ -93,7 +110,7 @@ public class PlayerView extends BorderPane{
 		leftBox.setMinWidth(700);
 		leftBox.setPadding(sameInsets);
 		
-		//Cover Image setup
+		//Right-Box einstellen
 		VBox rightBox = new VBox();
 		
 		imageView = new ImageView();
@@ -110,6 +127,11 @@ public class PlayerView extends BorderPane{
 		topBox.setMinHeight(600);
 	}
 	
+	/**
+	 * Center-Box von Player View einstlellen
+	 * 
+	 * @param centerBox
+	 */
 	public void setCenterBox(HBox centerBox) {
 		musicProgress = new ProgressBar(0);
 		musicProgress.setPrefWidth(1100);
@@ -121,6 +143,15 @@ public class PlayerView extends BorderPane{
 		centerBox.setSpacing(DISTANCE);
 	}
 	
+	/**
+	 * Bottom-Box von Player View einstellen 
+	 * Bottom-Box:
+	 * 		- playlist-box
+	 * 		- player-box
+	 * 		- volume-box
+	 * 	
+	 * @param bottomBox
+	 */
 	public void setBottomBox(HBox bottomBox) {
 		HBox playlistBox = new HBox();
 		

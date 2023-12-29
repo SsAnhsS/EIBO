@@ -2,6 +2,12 @@ package business;
 
 import java.util.ArrayList;
 
+/**Playlist Manager Klasse
+ * Playlist kontrollieren
+ * 
+ * @author Thi Hai Anh, Luong _ 1176913
+ * @author Khanh Linh, Truong _ 1257179
+ */
 public class PlaylistManager {
 	
 	private Playlist playlist;

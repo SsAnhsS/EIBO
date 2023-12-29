@@ -7,6 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**Playlist Klasse
+ * Playlist einstellen
+ * 
+ * @author Thi Hai Anh, Luong _ 1176913
+ * @author Khanh Linh, Truong _ 1257179
+ */
 public class Playlist {
 	private String playlistName;
 	private ArrayList<Track> tracks;
@@ -19,6 +25,9 @@ public class Playlist {
 		savePlaylist();
 	}
 	
+	/**
+	 * Playlist speichern
+	 */
 	public void savePlaylist() {
 		BufferedReader reader;
 
@@ -43,6 +52,11 @@ public class Playlist {
 		}
 	}
 	
+	/**
+	 * Nehmen Track bei Index in ArrayList tracks
+	 * @param index
+	 * @return Track
+	 */
 	public Track getTrack(int n) {
 		for(Track aktTrack : tracks) {
 			if(n == tracks.indexOf(aktTrack)) {
@@ -52,6 +66,11 @@ public class Playlist {
 		return null;
 	}
 	
+	/**
+	 * Nehmen Index von Track in ArrayList tracks
+	 * @param track
+	 * @return index
+	 */
 	public int getIndex(Track track) {
 		int index = 0;
 		for(Track aktTrack : tracks) {

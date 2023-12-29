@@ -3,6 +3,12 @@ package business;
 import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 
+/**Mp3-Player Klasse
+ * Funktionen von Mp3-Player einstellen
+ * 
+ * @author Thi Hai Anh, Luong _ 1176913
+ * @author Khanh Linh, Truong _ 1257179
+ */
 public class MP3Player {
 	
 	private SimpleMinim minim;

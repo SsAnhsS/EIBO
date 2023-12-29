@@ -10,6 +10,11 @@ import javafx.stage.Stage;
 import presentation.scenes.PlayerViewController;
 import presentation.scenes.PlaylistViewController;
 
+/**Mp3 Application
+ * 
+ * @author Thi Hai Anh, Luong _ 1176913
+ * @author Khanh Linh, Truong _ 1257179
+ */
 public class MP3_App extends Application{
 	
 	private Stage primaryStage;
@@ -54,6 +59,10 @@ public class MP3_App extends Application{
 		
 	}
 	
+	/**
+	 * Scene auswählen
+	 * @param ViewName
+	 */
 	public void switchView(ViewName name) {
 		Scene currentScene = primaryStage.getScene();
 		

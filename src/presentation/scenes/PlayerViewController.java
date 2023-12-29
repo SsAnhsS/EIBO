@@ -24,6 +24,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+/**Player View Controller Klasse
+ * Player View kontrollieren
+ * 
+ * @author Thi Hai Anh, Luong _ 1176913
+ * @author Khanh Linh, Truong _ 1257179
+ */
 public class PlayerViewController {
 
 	PlayerView playerView;
@@ -85,6 +91,10 @@ public class PlayerViewController {
 		initialize();
 	}
 	
+	/**
+	 * Informationen von Track in Player View einsetzen
+	 * @param aktTrack
+	 */
 	public void setInfo(Track aktTrack) {
 		//elapsedTime = (int) (endTime - startTime) / 1000;
 		songName.setText(aktTrack.getTitle());
@@ -219,6 +229,9 @@ public class PlayerViewController {
 		});
 	}
 	
+	/**
+	 * Style von Play Button update
+	 */
 	private void updatePlayButtonStyle() {
         if (isPlaying) {
             playButton.getStyleClass().add("pause-icon");

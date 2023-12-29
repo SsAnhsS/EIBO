@@ -10,6 +10,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 
+/**Playlist View Klasse
+ * Playlist View einstellen
+ * 
+ * @author Thi Hai Anh, Luong _ 1176913
+ * @author Khanh Linh, Truong _ 1257179
+ */
 public class PlaylistView extends TilePane{
 	
 	public final double DISTANCE = 850;

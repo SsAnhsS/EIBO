@@ -12,7 +12,12 @@ import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
-
+/**Track Klasse
+ * Track einstellen
+ * 
+ * @author Thi Hai Anh, Luong _ 1176913
+ * @author Khanh Linh, Truong _ 1257179
+ */
 public class Track {
 	
 	private Mp3File mp3File;
@@ -60,7 +65,12 @@ public class Track {
 	public void setSoundFile(String file) {
 		soundFile = file;
 	}
-
+	
+	/**
+	 * Speichern BufferedImage aus Bytes Array
+	 * @param Bytes Array
+	 * @return BufferedImage
+	 */
 	public BufferedImage byteArrayToImage(byte[] bytes){  
         BufferedImage bufferedImage = null;
         ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
@@ -72,6 +82,10 @@ public class Track {
         return bufferedImage;
 	}
 	
+	/**
+	 * Speichern BufferedImage in new File (.jpg)
+	 * @param BufferedImage
+	 */
 	public void saveImage(BufferedImage bufferedImage) {
 		outputFile = new File("src/data/images/" + getTitle() + ".jpg");
 		try {
@@ -82,6 +96,10 @@ public class Track {
 		}
 	}
 	
+	/**
+	 * Relative Path von Photo-Cover von Track 
+	 * @return Relative Path
+	 */
 	public String getPhotoCover() {
 		return "src/data/images/" + outputFile.getName();
 	}
