@@ -27,6 +27,12 @@ public class MP3Player {
 		playlist = list;
 	}
 	
+	public void select(Track track) {
+		this.track = track;
+		audioPlayer = minim.loadMP3File(track.getSoundFile());
+		play();
+	}
+	
 	public void play(String fileName) {
 		audioPlayer = minim.loadMP3File(fileName);
 		play();

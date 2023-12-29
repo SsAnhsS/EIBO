@@ -1,6 +1,7 @@
 package presentation.scenes;
 
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,15 +22,15 @@ public class PlayerView extends BorderPane{
 	public final double DISTANCE = 10;
 	
 	public Button playlistButton;
-	public Button settingButton;
 	
 	public Insets sameInsets = new Insets(10);
 	public double sameWidth = 400;
 	
 	public Label songName;
 	public Label artistName;
+	public Label albumName;
 	
-	public Image image;
+	public ImageView imageView;
 	
 	public Button playButton;
 	public Button skipButton;
@@ -66,9 +67,10 @@ public class PlayerView extends BorderPane{
 		songName.setId("song-name");
 		
 		artistName = new Label("");
-		artistName.setId("artist-name");
 		
-		nameBox.getChildren().addAll(songName, artistName);
+		albumName = new Label("");
+		
+		nameBox.getChildren().addAll(songName, artistName, albumName);
 		
 		nameBox.setPadding(sameInsets);
 		nameBox.setAlignment(Pos.CENTER_RIGHT);
@@ -96,17 +98,10 @@ public class PlayerView extends BorderPane{
 		
 		//Cover Image setup
 		VBox rightBox = new VBox();
-		image = new Image(getClass().getResourceAsStream(""));
-		//new FileInputStream("src\\data\\images\\img-test-1.jpg")
-		//file:///D:/GitHub/EIBO/src/data/images/img-test-1.jpg
-		//..\\data\\images\\img-test-2.jpg
-		//Path:/EIBO/src/data/images/img-test-1.jpg
-		//C:\\Users\\Steph\\Documents\\GitHub\\EIBO\\src\\data\\images\\img-test-1.jpg		
-		//Link Error make the Input Stream Null Error -> Need Fix		
-		ImageView imageView = new ImageView(image);
+		
+		imageView = new ImageView();
 		ImageViewPane imagePane = new ImageViewPane(imageView);
-		imagePane.setMinSize(400, 400);
-		imagePane.setStyle("-fx-background-color: #ffffff");
+		imagePane.setMaxSize(400, 400);
 		
 		rightBox.getChildren().add(imagePane);
 		
@@ -157,7 +152,7 @@ public class PlayerView extends BorderPane{
 		skipbackButton.getStyleClass().add("skipback-icon");
 		
 		playerBox.setPadding(sameInsets);
-		playerBox.setSpacing(DISTANCE);
+		playerBox.setSpacing(DISTANCE * 3);
 		playerBox.getChildren().addAll(skipbackButton, playButton, skipButton);
 		playerBox.setAlignment(Pos.CENTER);
 		playerBox.setPrefWidth(sameWidth);

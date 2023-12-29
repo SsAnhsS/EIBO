@@ -27,11 +27,11 @@ public class MP3_App extends Application{
 		player = new MP3Player();
 		views = new HashMap<>();
 		
-		PlayerViewController playerController = new PlayerViewController(player);
+		PlayerViewController playerController = new PlayerViewController(this, player);
 		playerView = playerController.getRoot();
 		views.put(ViewName.PlayerView, playerView);
 		
-		PlaylistViewController playlistViewController = new PlaylistViewController(player);
+		PlaylistViewController playlistViewController = new PlaylistViewController(this, player);
 		playlistView = playlistViewController.getRoot();
 		views.put(ViewName.PlaylistView, playlistView);
 	}
@@ -47,7 +47,6 @@ public class MP3_App extends Application{
 			primaryStage.setScene(scene);
 			
 			switchView(ViewName.PlayerView);
-			//switchView(ViewName.PlaylistView);
 			
 			primaryStage.setTitle("MP3 Application");
 			primaryStage.show();
@@ -58,7 +57,7 @@ public class MP3_App extends Application{
 		
 	}
 	
-	private void switchView(ViewName name) {
+	public void switchView(ViewName name) {
 		Scene currentScene = primaryStage.getScene();
 		
 		Pane nextView = views.get(name);

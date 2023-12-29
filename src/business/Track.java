@@ -2,6 +2,7 @@ package business;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -19,8 +20,10 @@ public class Track {
 	private int length;
 	private String artist;
 	private String albumTitle;
-	private BufferedImage photoCover;
+	private String photoCover;
 	private String soundFile;
+	
+	private File outputFile;
 	
 	public Track(String soundFile) {
 		this.soundFile = soundFile;
@@ -34,7 +37,7 @@ public class Track {
 				artist = id3v2Tag.getArtist();
 				albumTitle = id3v2Tag.getAlbum();
 				byte[] imageData = id3v2Tag.getAlbumImage();
-				photoCover = byteArrayToImage(imageData);
+				saveImage(byteArrayToImage(imageData));
 				//save in folder in .jpg form and get that by link
 			}
 			
@@ -71,8 +74,18 @@ public class Track {
         return bufferedImage;
 	}
 	
-	public BufferedImage getPhotoCover() {
-		return photoCover;
+	public void saveImage(BufferedImage bufferedImage) {
+		outputFile = new File("src/data/images/" + getTitle() + ".jpg");
+		try {
+			ImageIO.write(bufferedImage, "jpg", outputFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public String getPhotoCover() {
+		return "src/data/images/" + outputFile.getName();
 	}
 	
 	public String getTitle() {

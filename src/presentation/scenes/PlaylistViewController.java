@@ -2,9 +2,12 @@ package presentation.scenes;
 
 import java.util.ArrayList;
 
+import application.MP3_App;
+import application.ViewName;
 import business.MP3Player;
 import business.Playlist;
 import business.Track;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -20,23 +23,25 @@ public class PlaylistViewController {
 	PlaylistView playlistView;
 	
 	Label playlistName;
-	Button playerButton;
+	Button backButton;
 	ListView <Track> playlist;
 	
+	private MP3_App app;
 	private MP3Player player;
 	
 	ArrayList <Track> tracks;
 	
-	public PlaylistViewController(MP3Player player) {
+	public PlaylistViewController(MP3_App app, MP3Player player) {
+		this.player = player;
+		this.app = app;
+		
 		playlistView = new PlaylistView();
 		
 		playlistName = playlistView.playlistName;
-		playerButton = playlistView.playerButton;
+		backButton = playlistView.backButton;
 		playlist = playlistView.playlist;
 		
 		playlistName.setText(player.playlist.getPlaylistName());
-		
-		this.player = player;
 		
 		initialize();
 	}
@@ -55,7 +60,7 @@ public class PlaylistViewController {
 
 			@Override
 			public void changed(ObservableValue<? extends Track> observable, Track oldTrack, Track newTrack) {
-				player.play(newTrack.getSoundFile());
+				player.select(newTrack);
 				
 			}
 			
@@ -64,6 +69,23 @@ public class PlaylistViewController {
 		ObservableList <Track> playlistModel = playlist.getItems();
 		playlistModel.addAll(tracks);
 		
+		Thread deleteThread = new Thread(() -> {
+			  while(playlistModel.size() > 5) {
+				  try {
+					Platform.runLater(() -> playlistModel.remove(0));
+					Thread.sleep(500);
+				  } catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				  }
+			  }
+		});
+			
+		//deleteThread.start();
+		
+		backButton.setOnAction(event -> {
+			app.switchView(ViewName.PlayerView);
+		});
 	}
 	
 	public Pane getRoot() {

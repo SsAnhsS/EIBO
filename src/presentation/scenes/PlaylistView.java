@@ -4,6 +4,7 @@ import java.util.List;
 
 import business.Track;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -17,34 +18,35 @@ public class PlaylistView extends TilePane{
 	
 	public Label playlistName;
 	
-	public Button playerButton;
+	public Button backButton;
 	
 	public ListView <Track> playlist;
 	
 	public PlaylistView() {
-		VBox leftBox = new VBox();
+		VBox box = new VBox();
 		
 		TilePane playlistNameBox = new TilePane();
 		playlistName = new Label("");
-		playerButton = new Button("");
+		backButton = new Button("");
+
+		backButton.setId("back-button");
+		backButton.getStyleClass().add("icon-button");
+		backButton.getStyleClass().add("back-icon");
 		
 		playlistNameBox.setHgap(DISTANCE);
 		playlistNameBox.setOrientation(Orientation.HORIZONTAL);
-		playlistNameBox.getChildren().addAll(playlistName, playerButton);
+		playlistNameBox.getChildren().addAll(playlistName, backButton);
 		
-		playlist = new ListView();
+		playlist = new ListView<>();
 		
 		//playlist.getStyleClass().add("margin-5px");
 		
 		//leftBox.getStyleClass().add("margin-5px");
-		leftBox.getChildren().addAll(playlistNameBox, playlist);
-		leftBox.setMaxWidth(430);
+		box.getChildren().addAll(playlistNameBox, playlist);
+		box.setMinWidth(1200);
+		box.setAlignment(Pos.CENTER);
 		
-		HBox rightBox = new HBox();
-		
-		this.setHgap(DISTANCE);
-		this.setOrientation(Orientation.HORIZONTAL);
-		this.getChildren().addAll(leftBox, rightBox);
+		this.getChildren().addAll(box);
 	}
 	
 	

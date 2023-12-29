@@ -32,8 +32,8 @@
 }
 
 .icon-button{
-	-fx-min-width: 52px;
-	-fx-min-height: 52px;
+	-fx-min-width: 64px;
+	-fx-min-height: 64px;
 	-fx-padding: 5 5 5 5;
 	-fx-background-repeat: no-repeat no-repeat;
 	-fx-background-size: 28 28;
@@ -56,20 +56,20 @@
 }
 
 #play-button.play-icon {
-  	-fx-background-radius: 26;
+  	-fx-background-radius: 32;
 	-fx-background-image: url("../../../src/assets/icons/icon-play-48.png");
 }
 
 #play-button.pause-icon {
-    -fx-background-radius: 26;
+    -fx-background-radius: 32;
 	-fx-background-image: url("../../../src/assets/icons/icon-pause-48.png");
 }
 
 #skip-button.skip-icon {
-	-fx-min-width: 42px;
-  	-fx-min-height: 42px;
+	-fx-min-width: 52px;
+  	-fx-min-height: 52px;
   	-fx-padding: 5 5 5 5;
- 	-fx-background-radius: 21;
+ 	-fx-background-radius: 26;
   	-fx-background-repeat: no-repeat no-repeat;
 	-fx-background-size: 24 24;
   	-fx-background-position:center;
@@ -77,10 +77,10 @@
 }
 
 #skipback-button.skipback-icon{
-	-fx-min-width: 42px;
-  	-fx-min-height: 42px;
+	-fx-min-width: 52px;
+  	-fx-min-height: 52px;
   	-fx-padding: 5 5 5 5;
- 	-fx-background-radius: 21;
+ 	-fx-background-radius: 26;
   	-fx-background-repeat: no-repeat no-repeat;
 	-fx-background-size: 24 24;
   	-fx-background-position:center;
@@ -115,4 +115,8 @@
 	-fx-background-size: 30 30;
   	-fx-background-position:center;
   	-fx-background-image: url("../../../src/assets/icons/icon-repeat-one-48.png");
+}
+
+#back-button.back-icon{
+	-fx-background-image: url("../../../src/assets/icons/icon-down-48.png");
 }

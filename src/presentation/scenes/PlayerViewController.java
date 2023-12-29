@@ -1,5 +1,10 @@
 package presentation.scenes;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import application.MP3_App;
+import application.ViewName;
 import business.MP3Player;
 import business.Track;
 import javafx.animation.KeyFrame;
@@ -14,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -24,8 +30,11 @@ public class PlayerViewController {
 	
 	Label songName;
 	Label artistName;
+	Label albumName;
 	
-	Image image;
+	ImageView imageView;
+	
+	Button playlistButton;
 	
 	Button playButton;
 	Button skipButton;
@@ -41,17 +50,24 @@ public class PlayerViewController {
 	Slider volumeSlider;
 	Text volume;
 	
+	private MP3_App app;
 	private MP3Player player;
 	
 	boolean isPlaying;
 	
-	public PlayerViewController(MP3Player player) {
+	public PlayerViewController(MP3_App app, MP3Player player) {
+		this.player = player;
+		this.app = app;
+		
 		playerView = new PlayerView();
 		
 		songName = playerView.songName;
 		artistName = playerView.artistName;
+		albumName = playerView.albumName;
 		
-		image = playerView.image;
+		imageView = playerView.imageView;
+		
+		playlistButton = playerView.playlistButton;
 		
 		playButton = playerView.playButton;
 		skipButton = playerView.skipButton;
@@ -66,8 +82,6 @@ public class PlayerViewController {
 		
 		setInfo(player.track);
 		
-		this.player = player;
-		
 		initialize();
 	}
 	
@@ -75,7 +89,15 @@ public class PlayerViewController {
 		//elapsedTime = (int) (endTime - startTime) / 1000;
 		songName.setText(aktTrack.getTitle());
 		artistName.setText(aktTrack.getArtist());
-		//image = aktTrack.getPhotoCover();
+		albumName.setText(aktTrack.getAlbumTitle());
+		
+		try {
+			imageView.setImage(new Image(new FileInputStream(aktTrack.getPhotoCover())));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		DURATION_SECONDS = aktTrack.getLength();
 		time.setText(aktTrack.getLength()/60 + ":" + aktTrack.getLength()%60);
 	}
@@ -126,6 +148,7 @@ public class PlayerViewController {
 		
 		//set isSkipped = false, when true -> change the status -> else is same
 		skipButton.setOnAction(event ->{
+			
 			player.skip();
 			isPlaying = true;
 			updatePlayButtonStyle();
@@ -189,6 +212,10 @@ public class PlayerViewController {
 				player.volume(gainValue);
 				volume.setText(newValue.intValue() + "");
 			}
+		});
+		
+		playlistButton.setOnAction(event -> {
+			app.switchView(ViewName.PlaylistView);
 		});
 	}
 	
