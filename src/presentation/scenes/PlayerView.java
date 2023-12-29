@@ -1,15 +1,11 @@
 package presentation.scenes;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -81,13 +77,14 @@ public class PlayerView extends BorderPane{
 		
 		shuffleButton = new Button (""); 
 		shuffleButton.setId("shuffle-button");
+		shuffleButton.getStyleClass().add("icon-button");
 		shuffleButton.getStyleClass().add("shuffle-icon");
 		
 		repeatButton = new Button("");
 		repeatButton.setId("repeat-button");
+		repeatButton.getStyleClass().add("icon-button");
 		repeatButton.getStyleClass().add("repeat-icon");
 		
-		shuffleBox.setPadding(sameInsets);
 		shuffleBox.setSpacing(DISTANCE);
 		shuffleBox.getChildren().addAll(shuffleButton, repeatButton);
 		shuffleBox.setAlignment(Pos.CENTER_LEFT);
@@ -145,10 +142,12 @@ public class PlayerView extends BorderPane{
 		
 		skipButton = new Button ("");
 		skipButton.setId("skip-button");
+		skipButton.getStyleClass().add("icon-button");
 		skipButton.getStyleClass().add("skip-icon");
 		
 		skipbackButton = new Button ("");
 		skipbackButton.setId("skipback-button");
+		skipbackButton.getStyleClass().add("icon-button");
 		skipbackButton.getStyleClass().add("skipback-icon");
 		
 		playerBox.setPadding(sameInsets);
@@ -160,6 +159,7 @@ public class PlayerView extends BorderPane{
 		HBox volumeBox = new HBox();
 		Button volumeIcon = new Button("");
 		volumeIcon.setId("volume");
+		volumeIcon.getStyleClass().add("icon-button");
 		volumeIcon.getStyleClass().add("volume-icon");
 		
 		volume = new Text("60");

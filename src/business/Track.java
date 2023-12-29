@@ -20,7 +20,6 @@ public class Track {
 	private int length;
 	private String artist;
 	private String albumTitle;
-	private String photoCover;
 	private String soundFile;
 	
 	private File outputFile;
@@ -38,7 +37,6 @@ public class Track {
 				albumTitle = id3v2Tag.getAlbum();
 				byte[] imageData = id3v2Tag.getAlbumImage();
 				saveImage(byteArrayToImage(imageData));
-				//save in folder in .jpg form and get that by link
 			}
 			
 		} catch (UnsupportedTagException e) {

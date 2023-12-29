@@ -4,13 +4,10 @@ import java.util.HashMap;
 
 import business.MP3Player;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import presentation.scenes.PlayerView;
 import presentation.scenes.PlayerViewController;
-import presentation.scenes.PlaylistView;
 import presentation.scenes.PlaylistViewController;
 
 public class MP3_App extends Application{

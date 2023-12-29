@@ -1,21 +1,19 @@
 package presentation.scenes;
 
-import java.util.List;
-
 import business.Track;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 
 public class PlaylistView extends TilePane{
 	
-	public final double DISTANCE = 10;
-	
+	public final double DISTANCE = 850;
+			
 	public Label playlistName;
 	
 	public Button backButton;
@@ -27,6 +25,7 @@ public class PlaylistView extends TilePane{
 		
 		TilePane playlistNameBox = new TilePane();
 		playlistName = new Label("");
+		playlistName.setId("playlist-name");
 		backButton = new Button("");
 
 		backButton.setId("back-button");
@@ -38,13 +37,12 @@ public class PlaylistView extends TilePane{
 		playlistNameBox.getChildren().addAll(playlistName, backButton);
 		
 		playlist = new ListView<>();
+		playlist.setId("playlist-box");
 		
-		//playlist.getStyleClass().add("margin-5px");
-		
-		//leftBox.getStyleClass().add("margin-5px");
 		box.getChildren().addAll(playlistNameBox, playlist);
 		box.setMinWidth(1200);
 		box.setAlignment(Pos.CENTER);
+		box.setPadding(new Insets(20, 100, 20, 150));
 		
 		this.getChildren().addAll(box);
 	}

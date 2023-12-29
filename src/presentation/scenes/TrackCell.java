@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 
 import business.Track;
 import javafx.geometry.Insets;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
@@ -17,7 +16,7 @@ import mp3player.scene.layout.ImageViewPane;
 public class TrackCell extends ListCell<Track>{
 	
 	public final double DISTANCE = 10;
-	public Insets sameInsets = new Insets(5);
+	public Insets insets = new Insets(20, 0, 10, 0);
 	
 	HBox trackBox;
 	
@@ -29,6 +28,8 @@ public class TrackCell extends ListCell<Track>{
 	public TrackCell() {
 		infoPane = new VBox();
 		title = new Label();
+		title.setId("title");
+		
 		artist = new Label();
 		infoPane.getChildren().addAll(title, artist);
 		
@@ -42,7 +43,7 @@ public class TrackCell extends ListCell<Track>{
 		trackBox.getChildren().addAll(imagePane, infoPane);
 		
 		trackBox.setSpacing(DISTANCE);
-		trackBox.setPadding(sameInsets);
+		trackBox.setPadding(insets);
 	}
 	
 	protected void updateItem(Track item, boolean empty) {

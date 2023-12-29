@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import application.MP3_App;
 import application.ViewName;
 import business.MP3Player;
-import business.Playlist;
 import business.Track;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;

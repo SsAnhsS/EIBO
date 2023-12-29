@@ -1,7 +1,5 @@
 package business;
 
-import java.util.ArrayList;
-
 import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 

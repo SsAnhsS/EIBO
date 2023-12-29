@@ -1,13 +1,13 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
 .root{
-	-fx-background-color: #F1E8D9;
+	-fx-background-color: linear-gradient(to right, #333333 , #ffffff);
   	display: block;
 }
 
 .label{ 
 	-fx-font-family: "Agency FB";
-  	-fx-text-fill: #415ee0;
+  	-fx-text-fill: #000000;
   	-fx-font-weight: bold;
   	-fx-font-size: 24px;
 }
@@ -16,9 +16,18 @@
 	-fx-font-size: 48px;
 }
 
+#playlist-name{
+	-fx-font-size: 48px;	
+}
+
+#title{
+	-fx-font-size: 28px;
+}
+
 .button{
   	-fx-background-color: #B9D6F3;
 }
+
 .hbox{
   	-fx-margin: 0 5 0 5;
 }
@@ -29,76 +38,60 @@
 	-fx-min-height: 64px;
 	-fx-padding: 5 5 5 5;
 	-fx-background-repeat: no-repeat no-repeat;
-	-fx-background-size: 28 28;
+	-fx-background-size: 48 48;
 	-fx-background-color: transparent;
 	-fx-background-position:center;	    
 }
 
 #playlist-button.playlist-icon{
-	-fx-background-size: 48 48;
-	/*add style */
 	-fx-background-image: url("../../../src/assets/icons/icon-playlist-48.png");
 }
 
 #volume.volume-icon{
-	-fx-min-width: 32px;
-  	-fx-min-height: 32px;
-	/*add style*/
+	-fx-background-size: 30 30;
   	-fx-background-image: url("../../../src/assets/icons/icon-volume-48.png");
 }
 
 #play-button.play-icon {
-  	-fx-background-radius: 32;
 	-fx-background-image: url("../../../src/assets/icons/icon-play-48.png");
 }
 
 #play-button.pause-icon {
-    -fx-background-radius: 32;
 	-fx-background-image: url("../../../src/assets/icons/icon-pause-48.png");
 }
 
 #skip-button.skip-icon {
-	-fx-min-width: 52px;
-  	-fx-min-height: 52px;
- 	-fx-background-radius: 26;
-  	/*add style */
-	-fx-background-size: 24 24;
+	-fx-background-size: 30 30;
 	-fx-background-image: url("../../../src/assets/icons/icon-skip-48.png");
 }
 
 #skipback-button.skipback-icon{
-	-fx-min-width: 52px;
-  	-fx-min-height: 52px;
- 	-fx-background-radius: 26;
-  	/*add style */
-	-fx-background-size: 24 24;
+	-fx-background-size: 30 30;
 	-fx-background-image: url("../../../src/assets/icons/icon-skip-back-48.png");
 }
 
 #shuffle-button.shuffle-icon{
-	-fx-min-width: 42px;
-  	-fx-min-height: 42px;
-	/*add style */
 	-fx-background-size: 30 30;
   	-fx-background-image: url("../../../src/assets/icons/icon-shuffle-48.png");
 }
 
 #repeat-button.repeat-icon{
-	-fx-min-width: 42px;
-  	-fx-min-height: 42px;
-	/*add style */
 	-fx-background-size: 30 30;
   	-fx-background-image: url("../../../src/assets/icons/icon-repeat-48.png");
 }
 
 #repeat-button.repeat-one-icon{
-	-fx-min-width: 42px;
-  	-fx-min-height: 42px;
-	/*add style */
 	-fx-background-size: 30 30;
   	-fx-background-image: url("../../../src/assets/icons/icon-repeat-one-48.png");
 }
 
 #back-button.back-icon{
 	-fx-background-image: url("../../../src/assets/icons/icon-down-48.png");
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+}
+.list-view {
+    -fx-background-color: transparent;
 }
