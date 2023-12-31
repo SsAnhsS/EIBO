@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 
@@ -52,6 +53,40 @@ public class PlaylistViewController {
 	}
 	
 	public void initialize() {
+		updatePlaylist();
+		
+		playlist.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		
+		playlist.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Track>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Track> observable, Track oldTrack, Track newTrack) {
+				player.pause();
+				player.select(newTrack);
+			}
+			
+		});
+		
+//		Thread deleteThread = new Thread(() -> {
+//			  while(playlistModel.size() > 5) {
+//				  try {
+//					Platform.runLater(() -> playlistModel.remove(0));
+//					Thread.sleep(500);
+//				  } catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				  }
+//			  }
+//		});
+//			
+//		deleteThread.start();
+		
+		backButton.setOnAction(event -> {
+			app.switchView(ViewName.PlayerView);
+		});
+	}
+	
+	public void updatePlaylist() {
 		tracks = player.playlist.getTracks();
 		
 		playlist.setCellFactory(new Callback<ListView<Track>, ListCell<Track>>() {
@@ -60,37 +95,10 @@ public class PlaylistViewController {
 				return new TrackCell();
 			}
 		});
-		
-		playlist.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Track>() {
 
-			@Override
-			public void changed(ObservableValue<? extends Track> observable, Track oldTrack, Track newTrack) {
-				player.select(newTrack);
-				
-			}
-			
-		});
-		
 		ObservableList <Track> playlistModel = playlist.getItems();
 		playlistModel.addAll(tracks);
 		
-		Thread deleteThread = new Thread(() -> {
-			  while(playlistModel.size() > 5) {
-				  try {
-					Platform.runLater(() -> playlistModel.remove(0));
-					Thread.sleep(500);
-				  } catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				  }
-			  }
-		});
-			
-		//deleteThread.start();
-		
-		backButton.setOnAction(event -> {
-			app.switchView(ViewName.PlayerView);
-		});
 	}
 	
 	public Pane getRoot() {

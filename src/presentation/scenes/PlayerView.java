@@ -42,7 +42,7 @@ public class PlayerView extends BorderPane{
 	
 	public ProgressBar musicProgress;
 	public Text time;
-	public Slider volumeSlider = new Slider(0, 100, 60);
+	public Slider volumeSlider;
 	public Text volume;
 	
 	public PlayerView() {
@@ -101,6 +101,7 @@ public class PlayerView extends BorderPane{
 		repeatButton.setId("repeat-button");
 		repeatButton.getStyleClass().add("icon-button");
 		repeatButton.getStyleClass().add("repeat-icon");
+		repeatButton.setOpacity(0.5);
 		
 		shuffleBox.setSpacing(DISTANCE);
 		shuffleBox.getChildren().addAll(shuffleButton, repeatButton);
@@ -193,6 +194,7 @@ public class PlayerView extends BorderPane{
 		volumeIcon.getStyleClass().add("icon-button");
 		volumeIcon.getStyleClass().add("volume-icon");
 		
+		volumeSlider = new Slider(0, 100, 60);
 		volume = new Text("60");
 		
 		volumeBox.getChildren().addAll(volumeIcon, volumeSlider, volume);

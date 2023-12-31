@@ -97,6 +97,10 @@ public class Playlist {
 		return names;
 	}
 	
+	public void setPlaylist(ArrayList <Track> newTracks) {
+		tracks = newTracks;
+	}
+	
 	public void setPlaylistName(String name) {
 		playlistName = name;
 	}

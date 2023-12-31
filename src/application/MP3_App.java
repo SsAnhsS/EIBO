@@ -23,17 +23,20 @@ public class MP3_App extends Application{
 	private Pane playerView;
 	private Pane playlistView;
 	
+	PlayerViewController playerViewController;
+	PlaylistViewController playlistViewController;
+	
 	MP3Player player;
 	
 	public void init() {
 		player = new MP3Player();
 		views = new HashMap<>();
 		
-		PlayerViewController playerController = new PlayerViewController(this, player);
-		playerView = playerController.getRoot();
+		playerViewController = new PlayerViewController(this, player);
+		playerView = playerViewController.getRoot();
 		views.put(ViewName.PlayerView, playerView);
 		
-		PlaylistViewController playlistViewController = new PlaylistViewController(this, player);
+		playlistViewController = new PlaylistViewController(this, player);
 		playlistView = playlistViewController.getRoot();
 		views.put(ViewName.PlaylistView, playlistView);
 	}

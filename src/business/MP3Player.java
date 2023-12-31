@@ -1,5 +1,8 @@
 package business;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 
@@ -17,6 +20,8 @@ public class MP3Player {
 	private PlaylistManager playlistManager;
 	public Playlist playlist;
 	public Track track;
+	
+	public boolean isPlaying = false;
 	
 	public MP3Player() {
 		playlistManager = new PlaylistManager();
@@ -42,34 +47,36 @@ public class MP3Player {
 		play();
 	}
 	
-	public class PlayThread extends Thread{
-		public void run() {
-			playAudio();
-		}
-	}
-	
-	private void playAudio() {
-		for(int i = 0; i < 10; i++) {
-			try {
-				Thread.sleep(1000);
-			}
-			catch(InterruptedException e) {
-				e.printStackTrace();
-			}
-			System.out.println("playing " + i);
-		}
-	}
+//	public class PlayThread extends Thread{
+//		public void run() {
+//			playAudio();
+//		}
+//	}
+//	
+//	private void playAudio() {
+//		for(int i = 0; i < 10; i++) {
+//			try {
+//				Thread.sleep(1000);
+//			}
+//			catch(InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//			System.out.println("playing " + i);
+//		}
+//	}
 	
 	public void play() {
 		audioPlayer.play();
-		PlayThread playThread = new PlayThread();
-		
-		playThread.setDaemon(true);
-		playThread.start();
+		isPlaying = true;
+//		PlayThread playThread = new PlayThread();
+//		
+//		playThread.setDaemon(true);
+//		playThread.start();
 	}
 	
 	public void pause() {
 		audioPlayer.pause();
+		isPlaying = false;
 	}
 	
 	public void skip() {
@@ -94,9 +101,25 @@ public class MP3Player {
 		play(track.getSoundFile());
 	}
 	
+	public void shuffle() {
+		ArrayList <Track> tracks = playlist.getTracks();
+		Collections.shuffle(tracks);
+		playlist.setPlaylist(tracks);
+		playlistManager.setPlaylist(tracks);
+		System.out.println("Shuffle done!");
+		for(Track aktTrack: playlist.getTracks()) {
+			System.out.println(aktTrack.getTitle());
+		}
+		
+	}
+	
+	public void repeat() {
+		
+	}
+	
 	public void volume(float value) {
 		//audioPlayer.setVolume(value); //minim error, Volume is not supported
-		audioPlayer.setGain(value); //not change the value
+		audioPlayer.setGain(value);
 	}
 	
 }

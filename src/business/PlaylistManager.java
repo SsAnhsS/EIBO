@@ -30,4 +30,8 @@ public class PlaylistManager {
 	public ArrayList <String> getTrackNames(){
 		return playlist.getTrackNames();
 	}
+	
+	public void setPlaylist(ArrayList<Track> newTracks) {
+		playlist.setPlaylist(newTracks);
+	}
 }
