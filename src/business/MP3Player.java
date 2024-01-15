@@ -21,6 +21,8 @@ public class MP3Player {
 	public Playlist playlist;
 	public Track track;
 	
+	public int defaultVolume;
+
 	public boolean isPlaying = false;
 	
 	public MP3Player() {
@@ -30,6 +32,7 @@ public class MP3Player {
 		minim = new SimpleMinim(true);
 		audioPlayer = new SimpleAudioPlayer(null, false);
 		audioPlayer = minim.loadMP3File(track.getSoundFile());
+		volume(defaultVolume);
 	}
 	
 	public void setPlaylist(Playlist list) {
@@ -117,9 +120,11 @@ public class MP3Player {
 		
 	}
 	
-	public void volume(float value) {
-		//audioPlayer.setVolume(value); //minim error, Volume is not supported
-		audioPlayer.setGain(value);
+	public void volume(int value) {
+		//Weil Gain Value hat Range [-50;0]
+		float gainValue = (float) (value-100)/2;
+		audioPlayer.setGain(gainValue);
+		System.out.println(value + " " + gainValue);
 	}
 	
 }

@@ -196,9 +196,7 @@ public class PlayerViewController {
 		//Änderung der Volume
 		volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				
-				float gainValue = newValue.intValue() - oldValue.intValue();
-				player.volume(gainValue);
+				player.volume(newValue.intValue());
 				volume.setText(newValue.intValue() + "");
 			}
 		});

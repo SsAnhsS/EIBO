@@ -48,7 +48,7 @@ public class KeyboardController {
 				mp3Player.pause();
 				break;
 			case "volume":
-				mp3Player.volume(Float.valueOf(commands[1]));
+				mp3Player.volume(Integer.valueOf(commands[1]));
 				break;
 			}
 		} while(true);

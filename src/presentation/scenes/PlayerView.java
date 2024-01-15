@@ -44,6 +44,7 @@ public class PlayerView extends BorderPane{
 	public Text time;
 	public Slider volumeSlider;
 	public Text volume;
+	public int defaultVolume = 50;
 	
 	public PlayerView() {
 		
@@ -194,8 +195,8 @@ public class PlayerView extends BorderPane{
 		volumeIcon.getStyleClass().add("icon-button");
 		volumeIcon.getStyleClass().add("volume-icon");
 		
-		volumeSlider = new Slider(0, 100, 60);
-		volume = new Text("60");
+		volumeSlider = new Slider(0, 100, 50);
+		volume = new Text("50");
 		
 		volumeBox.getChildren().addAll(volumeIcon, volumeSlider, volume);
 		volumeBox.setPadding(sameInsets);
