@@ -71,11 +71,23 @@ public class Playlist {
 	 * @param track
 	 * @return index
 	 */
-	public int getIndex(Track track) {
+	public int getIndex(Track currentTrack) {
 		int index = 0;
 		for(Track aktTrack : tracks) {
-			if(track.equals(aktTrack)) {
+			if(aktTrack.equals(currentTrack)) {
 				index = tracks.indexOf(aktTrack);
+				break;
+			}
+		}
+		return index;
+	}
+	
+	public int getIndex(String trackName) {
+		int index = 0;
+		for(Track aktTrack : tracks) {
+			if(aktTrack.getSoundFile().equals(trackName)) {
+				index = tracks.indexOf(aktTrack);
+				break;
 			}
 		}
 		return index;

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import application.MP3_App;
 import application.ViewName;
 import business.MP3Player;
+import business.Playlist;
 import business.Track;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -30,12 +31,13 @@ public class PlaylistViewController {
 	
 	Label playlistName;
 	Button backButton;
+	
 	ListView <Track> playlist;
 	
 	private MP3_App app;
 	private MP3Player player;
-	
-	ArrayList <Track> tracks;
+	private Thread updatePlaylist;
+	private ArrayList <Track> tracks;
 	
 	public PlaylistViewController(MP3_App app, MP3Player player) {
 		this.player = player;
@@ -47,47 +49,13 @@ public class PlaylistViewController {
 		backButton = playlistView.backButton;
 		playlist = playlistView.playlist;
 		
-		playlistName.setText(player.playlist.getPlaylistName());
+		playlistName.setText(player.getPlaylistProperty().getValue().getPlaylistName());
 		
+		updatePlaylist(player.getPlaylistProperty().getValue());
 		initialize();
 	}
 	
 	public void initialize() {
-		updatePlaylist();
-		
-		playlist.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		
-		playlist.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Track>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Track> observable, Track oldTrack, Track newTrack) {
-				player.pause();
-				player.select(newTrack);
-			}
-			
-		});
-		
-//		Thread deleteThread = new Thread(() -> {
-//			  while(playlistModel.size() > 5) {
-//				  try {
-//					Platform.runLater(() -> playlistModel.remove(0));
-//					Thread.sleep(500);
-//				  } catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				  }
-//			  }
-//		});
-//			
-//		deleteThread.start();
-		
-		backButton.setOnAction(event -> {
-			app.switchView(ViewName.PlayerView);
-		});
-	}
-	
-	public void updatePlaylist() {
-		tracks = player.playlist.getTracks();
 		
 		playlist.setCellFactory(new Callback<ListView<Track>, ListCell<Track>>() {
 			@Override
@@ -95,10 +63,67 @@ public class PlaylistViewController {
 				return new TrackCell();
 			}
 		});
-
-		ObservableList <Track> playlistModel = playlist.getItems();
-		playlistModel.addAll(tracks);
 		
+		playlist.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		
+		playlist.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Track>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Track> observable, Track oldTrack, Track newTrack) {
+				
+		        player.select(newTrack);
+			}
+			
+		});
+		
+		//Listener für TrackProperty
+		player.getTrackProperty().addListener(new ChangeListener<Track>() {
+			//update Titel, Image Cover und Music Progress
+			@Override
+			public void changed(ObservableValue<? extends Track> observable, Track oldValue, Track newValue) {
+				Platform.runLater(() -> player.setCurrentTrack(newValue));
+			}
+			
+		});
+		
+		//Listener für PlaylistProperty
+		player.getPlaylistProperty().addListener(new ChangeListener<Playlist>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Playlist> observable, Playlist oldValue, Playlist newValue) {
+				//Platform.runLater(() -> player.setCurrentPlaylist(newValue));
+				
+				Platform.runLater(new Runnable() {
+					public void run() {
+						//player.setCurrentTrack(newValue);
+//						tracks = player.getPlaylistProperty().getValue().getTracks();
+//						
+//						for(Track aktTrack: player.getPlaylistProperty().getValue().getTracks()) {
+//							System.out.println(aktTrack.getTitle());
+//						}
+//						
+//						ObservableList <Track> playlistModel = playlist.getItems();
+//						playlistModel.addAll(tracks);
+						
+						updatePlaylist(newValue);
+					}
+				});
+			}
+			
+		});
+		
+		backButton.setOnAction(event -> {
+			app.switchView(ViewName.PlayerView);
+		});
+	}
+	
+	public void updatePlaylist(Playlist list) {
+		//player.getPlaylistProperty().setValue(list);
+		tracks =list.getTracks();
+		ObservableList <Track> playlistModel = playlist.getItems();
+		playlistModel.clear();
+		playlistModel.setAll(tracks);
+		playlist.setItems(playlistModel);
 	}
 	
 	public Pane getRoot() {

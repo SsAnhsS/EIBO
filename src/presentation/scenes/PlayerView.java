@@ -34,17 +34,21 @@ public class PlayerView extends BorderPane{
 	
 	public ImageView imageView;
 	
-	public Button playButton;
-	public Button skipButton;
-	public Button skipbackButton;
 	public Button shuffleButton;
 	public Button repeatButton;
 	
-	public ProgressBar musicProgress;
+
+	public Button playButton;
+	public Button skipButton;
+	public Button skipbackButton;
+	
+	public Slider musicProgress;
 	public Text time;
 	public Slider volumeSlider;
 	public Text volume;
 	public int defaultVolume = 50;
+	
+	ControlView controlView;
 	
 	public PlayerView() {
 		
@@ -52,13 +56,20 @@ public class PlayerView extends BorderPane{
 		setTopBox(topBox);
 		this.setTop(topBox);
 		
-		HBox centerBox = new HBox();
-		setCenterBox(centerBox);
-		this.setCenter(centerBox);
+		controlView = new ControlView();
+		playlistButton = controlView.playlistButton;
 		
-		HBox bottomBox = new HBox();
-		setBottomBox(bottomBox);
-		this.setBottom(bottomBox);
+		playButton = controlView.playButton;
+		skipButton = controlView.skipButton;
+		skipbackButton = controlView.skipbackButton;
+		
+		musicProgress = controlView.musicProgress;
+		time = controlView.time;
+		volumeSlider = controlView.volumeSlider;
+		volume = controlView.volume;
+		
+		this.setBottom(controlView);
+		this.setPadding(new Insets(0, 0, 0, 50));
 	}
 	
 	/**
@@ -101,7 +112,7 @@ public class PlayerView extends BorderPane{
 		repeatButton = new Button("");
 		repeatButton.setId("repeat-button");
 		repeatButton.getStyleClass().add("icon-button");
-		repeatButton.getStyleClass().add("repeat-icon");
+		repeatButton.getStyleClass().add("repeat-one-icon");
 		repeatButton.setOpacity(0.5);
 		
 		shuffleBox.setSpacing(DISTANCE);
@@ -129,84 +140,5 @@ public class PlayerView extends BorderPane{
 		topBox.setMinHeight(600);
 	}
 	
-	/**
-	 * Center-Box von Player View einstlellen
-	 * 
-	 * @param centerBox
-	 */
-	public void setCenterBox(HBox centerBox) {
-		musicProgress = new ProgressBar(0);
-		musicProgress.setPrefWidth(1100);
-		musicProgress.setPrefHeight(12);
-		time = new Text("");
-		
-		centerBox.getChildren().addAll(musicProgress, time);
-		centerBox.setAlignment(Pos.CENTER);
-		centerBox.setSpacing(DISTANCE);
-	}
 	
-	/**
-	 * Bottom-Box von Player View einstellen 
-	 * Bottom-Box:
-	 * 		- playlist-box
-	 * 		- player-box
-	 * 		- volume-box
-	 * 	
-	 * @param bottomBox
-	 */
-	public void setBottomBox(HBox bottomBox) {
-		HBox playlistBox = new HBox();
-		
-		playlistButton = new Button ("");
-		playlistButton.setId("playlist-button");
-		playlistButton.getStyleClass().add("icon-button");
-		playlistButton.getStyleClass().add("playlist-icon");
-		
-		playlistBox.getChildren().add(playlistButton);
-		playlistBox.setAlignment(Pos.CENTER);
-		playlistBox.setPrefWidth(sameWidth);
-		
-		HBox playerBox = new HBox();
-		
-		playButton = new Button();
-		playButton.setId("play-button");
-		playButton.getStyleClass().add("icon-button");
-		playButton.getStyleClass().add("play-icon");
-		
-		skipButton = new Button ("");
-		skipButton.setId("skip-button");
-		skipButton.getStyleClass().add("icon-button");
-		skipButton.getStyleClass().add("skip-icon");
-		
-		skipbackButton = new Button ("");
-		skipbackButton.setId("skipback-button");
-		skipbackButton.getStyleClass().add("icon-button");
-		skipbackButton.getStyleClass().add("skipback-icon");
-		
-		playerBox.setPadding(sameInsets);
-		playerBox.setSpacing(DISTANCE * 3);
-		playerBox.getChildren().addAll(skipbackButton, playButton, skipButton);
-		playerBox.setAlignment(Pos.CENTER);
-		playerBox.setPrefWidth(sameWidth);
-		
-		HBox volumeBox = new HBox();
-		Button volumeIcon = new Button("");
-		volumeIcon.setId("volume");
-		volumeIcon.getStyleClass().add("icon-button");
-		volumeIcon.getStyleClass().add("volume-icon");
-		
-		volumeSlider = new Slider(0, 100, 50);
-		volume = new Text("50");
-		
-		volumeBox.getChildren().addAll(volumeIcon, volumeSlider, volume);
-		volumeBox.setPadding(sameInsets);
-		volumeBox.setSpacing(DISTANCE);
-		volumeBox.setPrefWidth(sameWidth);
-		volumeBox.setAlignment(Pos.CENTER);
-		
-		bottomBox.getChildren().addAll(playlistBox, playerBox, volumeBox);
-		bottomBox.setAlignment(Pos.CENTER);
-		bottomBox.setSpacing(DISTANCE);
-		bottomBox.setMinHeight(150);
-	}
 }

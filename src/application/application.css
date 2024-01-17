@@ -95,3 +95,9 @@
 .list-view {
     -fx-background-color: transparent;
 }
+
+.selected-item {
+    -fx-border-color: black;
+    -fx-border-width: 2;
+}
+

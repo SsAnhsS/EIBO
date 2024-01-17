@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import application.MP3_App;
 import application.ViewName;
 import business.MP3Player;
+import business.Playlist;
 import business.Track;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -42,8 +44,6 @@ public class PlayerViewController {
 
 	PlayerView playerView;
 	
-	PlaylistViewController playlistViewController;
-	
 	Label songName;
 	Label artistName;
 	Label albumName;
@@ -58,7 +58,7 @@ public class PlayerViewController {
 	Button shuffleButton;
 	Button repeatButton;
 	
-	ProgressBar musicProgress;
+	Slider musicProgress;
 	Text time;
 	Timeline timeline;
 	Duration duration;
@@ -66,15 +66,11 @@ public class PlayerViewController {
 	Slider volumeSlider;
 	Text volume;
 	
-	boolean isPlaying;
-	
 	public PlayerViewController(MP3_App app, MP3Player player) {
 		this.player = player;
 		this.app = app;
 		
 		playerView = new PlayerView();
-		
-		playlistViewController = new PlaylistViewController(app, player);
 		
 		songName = playerView.songName;
 		artistName = playerView.artistName;
@@ -95,103 +91,124 @@ public class PlayerViewController {
 		volumeSlider = playerView.volumeSlider;
 		volume = playerView.volume;
 		
-		setInfo(player.track);
-		
-		isPlaying = player.isPlaying;
+		setInfo(player.getTrackProperty().getValue());
 		
 		initialize();
 	}
 	
 	private void initialize() {
 		
-		//Kontrolle des Play Button
+		//Abspielen des aktuellen Track
 		playButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
 			
 			public void handle(ActionEvent event) {
 				
-				new Thread() {
-					
-					public void run() {
-						
-						if(isPlaying) {
-							isPlaying = false;
-							Platform.runLater(() -> {
-								playButton.getStyleClass().remove("pause-icon");
-								playButton.getStyleClass().add("play-icon");
-							});
-			                player.pause();
-						} else {
-							isPlaying = true;
-				            Platform.runLater(() -> {
-				            	playButton.getStyleClass().remove("play-icon");
-				            	playButton.getStyleClass().add("pause-icon");
-				            });
-			                player.play();
-						}
-						
-					}
-					
-				}.start();
-				
+				if(player.getPlayingProperty().getValue()) {
+	                player.pause();
+				} else {
+	                player.play();
+				}
 			}
 		});
 		
 		//Kontrolle des Skip Button
 		skipButton.setOnAction(event ->{
 			player.skip();
-			setInfo(player.track);
 		});
 		
 		//Kontrolle des Skip-Back Button
 		skipbackButton.setOnAction(event ->{
 			player.skipback();
-			setInfo(player.track);
 		});
 		
 		//Kontrolle des Shuffle Button
 		shuffleButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+			boolean isShuffling = false;
 			public void handle(ActionEvent event) {
 				player.shuffle();
-				playlistViewController.updatePlaylist();
 			}
 		});
 		
 		//Kontrolle des Repeat Button
 		repeatButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-			boolean isRepeating = false;
-			boolean isRepeatingOne = true;
+			boolean isSelected = !player.getRepeat();
 			
 			public void handle(ActionEvent event) {
-				if(isRepeating) {
-					repeatButton.getStyleClass().add("repeat-icon");
-					repeatButton.getStyleClass().remove("repeat-one-icon");
+				
+				if(isSelected) {
 					repeatButton.setOpacity(1);
-					isRepeating = false;
-					isRepeatingOne = true;
+					player.setRepeat(true);
+					isSelected = false;
 				}
 				else {
-					if(isRepeatingOne) {
-						repeatButton.getStyleClass().add("repeat-one-icon");
-						repeatButton.getStyleClass().remove("repeat-icon");
-						repeatButton.setOpacity(1);
-						isRepeatingOne = false;
-					}
-					else {
-						repeatButton.getStyleClass().add("repeat-icon");
-						repeatButton.getStyleClass().remove("repeat-one-icon");
-						repeatButton.setOpacity(0.5);
-						isRepeating = true;
-					}
+					repeatButton.setOpacity(0.5);
+					player.setRepeat(false);
+					isSelected = true;
 				}
+				
 			}
 		});
 		
-//		musicProgress.valueProperty().addListener(new ChangeListener<Duration>() {
-//			public void changed(ObservableValue<? extends Duration> observable, Duration oldTime, Duration newTime) {
-//				
-//				
-//			}
-//		});
+		
+		
+		//Listener für Play Button
+		player.getPlayingProperty().addListener(new ChangeListener<Boolean>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				Platform.runLater(new Runnable() {
+					public void run() {
+						if (newValue) {
+							playButton.getStyleClass().remove("play-icon");
+			            	playButton.getStyleClass().add("pause-icon");
+						} else {
+							playButton.getStyleClass().remove("pause-icon");
+							playButton.getStyleClass().add("play-icon");
+						}
+					}
+				});	
+				
+			}
+			
+		});
+		
+		//Listener für Time Property
+		player.getTimeProperty().addListener(new ChangeListener<Number>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				Platform.runLater(new Runnable() {
+					public void run() {
+						int timeValue = newValue.intValue();
+						String timeText = getTimeForm(timeValue) + " / " + 
+											getTimeForm(player.getTrackProperty().getValue().getLength());
+						time.setText(timeText);
+						musicProgress.valueProperty().set(timeValue);	
+					}
+				});
+			}
+			
+		});
+		
+		//Listener für TrackProperty
+		player.getTrackProperty().addListener(new ChangeListener<Track>() {
+			//update Titel, Image Cover und Music Progress
+			@Override
+			public void changed(ObservableValue<? extends Track> observable, Track oldValue, Track newValue) {
+				Platform.runLater(() -> setInfo(newValue));
+			}
+			
+		});
+		
+		//Listener für PlaylistProperty
+		player.getPlaylistProperty().addListener(new ChangeListener<Playlist>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Playlist> observable, Playlist oldValue, Playlist newValue) {
+				//Platform.runLater(() -> player.setCurrentPlaylist(newValue));
+			}
+			
+		});
 		
 		//Änderung der Volume
 		volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -223,17 +240,35 @@ public class PlayerViewController {
 			e.printStackTrace();
 		}
 		
-		musicProgress.setProgress(0.0);
+		time.setText("00:00 / " + getTimeForm(aktTrack.getLength()));
+		musicProgress.setMax(aktTrack.getLength());
 		
-		time.setText(aktTrack.getLength()/60 + ":" + aktTrack.getLength()%60);
-		
-		duration = Duration.seconds(aktTrack.getLength());
-		timeline = new Timeline(
-				new KeyFrame(Duration.ZERO, event -> musicProgress.setProgress(0), null),
-				new KeyFrame(duration, event -> musicProgress.setProgress(1), null)
-		);
-		
-		timeline.setCycleCount(1);
+		//player.getTrackProperty().setValue(aktTrack);
+	}
+	
+	/**
+	 * Zeit in String
+	 * @param timeValue
+	 * @return
+	 */
+	public String getTimeForm(int timeValue) {
+		String timeText = "";
+		int minutes = timeValue / 60;
+		int seconds = timeValue % 60;
+		if(minutes < 10) {
+			timeText += "0" + Integer.toString(minutes);
+		}
+		else {
+			timeText += Integer.toString(minutes);
+		}
+		timeText += ":";
+		if(seconds < 10) {
+			timeText += "0" + Integer.toString(seconds);
+		}
+		else {
+			timeText += Integer.toString(seconds);
+		}
+		return timeText;
 	}
 	
 	public Pane getRoot() {
